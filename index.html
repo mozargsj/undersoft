@@ -442,10 +442,33 @@
       padding:18px;
     }
 
+    .metric-head{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      margin-bottom:16px;
+    }
+
+    .metric-icon{
+      width:64px;
+      height:64px;
+      flex:0 0 64px;
+      object-fit:contain;
+      user-select:none;
+      pointer-events:none;
+      filter:
+        drop-shadow(0 0 8px rgba(214,255,75,.20))
+        drop-shadow(0 0 18px rgba(214,255,75,.10));
+    }
+
     .metric strong{
       display:block;
+      color:var(--accent);
       font-size:1.25rem;
-      margin-bottom:6px;
+      line-height:1.2;
+      margin:0;
+      text-shadow:
+        0 0 10px rgba(214,255,75,.10);
     }
 
     .metric span{
@@ -1069,7 +1092,16 @@
 
           <div class="case-grid">
             <div class="metric">
-              <strong>Antes</strong>
+              <div class="metric-head">
+                <img
+                  src="./assets/images/icon-before.png"
+                  alt=""
+                  class="metric-icon"
+                  loading="lazy"
+                  draggable="false"
+                />
+                <strong>Antes</strong>
+              </div>
               <span>
                 As imagens eram guardadas no Excel e copiadas uma a uma para cada orçamento.
                 As informações dos produtos também eram preenchidas manualmente.
@@ -1079,7 +1111,16 @@
             </div>
 
             <div class="metric">
-              <strong>O que foi feito</strong>
+              <div class="metric-head">
+                <img
+                  src="./assets/images/icon-automation.png"
+                  alt=""
+                  class="metric-icon"
+                  loading="lazy"
+                  draggable="false"
+                />
+                <strong>O que foi feito</strong>
+              </div>
               <span>
                 Automatizámos a inserção das imagens e das informações dos materiais.
                 Também criámos a geração automática de versões dos orçamentos
@@ -1088,14 +1129,23 @@
             </div>
 
             <div class="metric">
-              <strong>Resultado</strong>
+              <div class="metric-head">
+                <img
+                  src="./assets/images/icon-result.png"
+                  alt=""
+                  class="metric-icon"
+                  loading="lazy"
+                  draggable="false"
+                />
+                <strong>Resultado</strong>
+              </div>
               <span>
                 Os orçamentos de produtos standard passaram a ser feitos em
                 <b class="case-highlight">menos de 5 minutos</b>.
                 O valor anual de orçamentos emitidos passou de cerca de
                 <b class="case-highlight">400 mil euros</b> para
-                <b class="case-highlight">mais de 4 milhões de euros em orçamentos emitidos por ano, sem aumentar a equipa responsavel</b>
-                , somente com automação e simplificação de processos.
+                <b class="case-highlight">mais de 4 milhões de euros em orçamentos emitidos por ano, sem aumentar a equipa responsável</b>,
+                somente com automação e simplificação de processos.
               </span>
             </div>
           </div>
