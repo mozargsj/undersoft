@@ -667,6 +667,56 @@
       min-width:120px;
     }
 
+
+    .success-dialog{
+      width:min(calc(100% - 32px), 460px);
+      padding:0;
+      color:var(--text);
+      background:transparent;
+      border:0;
+      border-radius:22px;
+    }
+
+    .success-dialog::backdrop{
+      background:rgba(5,7,9,.82);
+      backdrop-filter:blur(8px);
+    }
+
+    .success-dialog-card{
+      padding:30px;
+      text-align:center;
+      background:var(--panel);
+      border:1px solid rgba(214,255,75,.28);
+      border-radius:22px;
+      box-shadow:var(--shadow);
+    }
+
+    .success-dialog-icon{
+      width:58px;
+      height:58px;
+      margin:0 auto 18px;
+      display:grid;
+      place-items:center;
+      border-radius:50%;
+      background:var(--accent);
+      color:var(--bg);
+      font-size:1.65rem;
+      font-weight:900;
+    }
+
+    .success-dialog-card h3{
+      margin-bottom:10px;
+    }
+
+    .success-dialog-card p{
+      color:var(--muted);
+      margin-bottom:22px;
+    }
+
+    .success-dialog-card .btn{
+      min-width:120px;
+    }
+
     footer{
       padding:36px 0;
       color:var(--muted-2);
@@ -1042,7 +1092,7 @@
                 <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
               </div>
 
-              <div id="formStatus" class="form-status" role="status" aria-live="polite"></div>
+              <div id="formStatus" class="form-status" role="alert" aria-live="assertive"></div>
 
               <button class="btn btn-primary" type="submit">
                 Enviar pedido
@@ -1102,23 +1152,21 @@
   </main>
 
 
-  <div
-    id="successModal"
-    class="success-modal"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="successModalTitle"
-    aria-describedby="successModalText"
+  <dialog
+    id="successDialog"
+    class="success-dialog"
+    aria-labelledby="successDialogTitle"
+    aria-describedby="successDialogText"
   >
-    <div class="success-modal-card">
-      <div class="success-modal-icon">✓</div>
-      <h3 id="successModalTitle">Pedido enviado com sucesso</h3>
-      <p id="successModalText">
+    <div class="success-dialog-card">
+      <div class="success-dialog-icon">✓</div>
+      <h3 id="successDialogTitle">Pedido enviado com sucesso</h3>
+      <p id="successDialogText">
         Recebemos a sua mensagem. Entraremos em contacto assim que possível.
       </p>
-      <button id="closeSuccessModal" class="btn btn-primary" type="button">OK</button>
+      <button id="closeSuccessDialog" class="btn btn-primary" type="button">OK</button>
     </div>
-  </div>
+  </dialog>
 
   <footer>
     <div class="container footer-inner">
@@ -1133,8 +1181,8 @@
     const contactForm = document.getElementById("contactForm");
     const formStatus = document.getElementById("formStatus");
     const submitButton = contactForm.querySelector('button[type="submit"]');
-    const successModal = document.getElementById("successModal");
-    const closeSuccessModal = document.getElementById("closeSuccessModal");
+    const successDialog = document.getElementById("successDialog");
+    const closeSuccessDialog = document.getElementById("closeSuccessDialog");
 
     contactForm.addEventListener("submit", async function(event) {
       event.preventDefault();
@@ -1167,8 +1215,8 @@
 
         contactForm.reset();
         formStatus.style.display = "none";
-        successModal.classList.add("is-visible");
-        closeSuccessModal.focus();
+        successDialog.showModal();
+        closeSuccessDialog.focus();
       } catch (error) {
         formStatus.textContent =
           "Não foi possível enviar o pedido. Tente novamente ou escreva para contacto@undersoft.pt.";
@@ -1179,21 +1227,27 @@
       }
     });
 
-    closeSuccessModal.addEventListener("click", function() {
-      successModal.classList.remove("is-visible");
+    closeSuccessDialog.addEventListener("click", function() {
+      successDialog.close();
       submitButton.focus();
     });
 
-    successModal.addEventListener("click", function(event) {
-      if (event.target === successModal) {
-        successModal.classList.remove("is-visible");
-        submitButton.focus();
-      }
+    successDialog.addEventListener("cancel", function(event) {
+      event.preventDefault();
+      successDialog.close();
+      submitButton.focus();
     });
 
-    document.addEventListener("keydown", function(event) {
-      if (event.key === "Escape" && successModal.classList.contains("is-visible")) {
-        successModal.classList.remove("is-visible");
+    successDialog.addEventListener("click", function(event) {
+      const rect = successDialog.getBoundingClientRect();
+      const clickedOutside =
+        event.clientX < rect.left ||
+        event.clientX > rect.right ||
+        event.clientY < rect.top ||
+        event.clientY > rect.bottom;
+
+      if (clickedOutside) {
+        successDialog.close();
         submitButton.focus();
       }
     });
