@@ -614,6 +614,59 @@
       overflow:hidden !important;
     }
 
+
+    .success-modal{
+      position:fixed;
+      inset:0;
+      z-index:1000;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      background:rgba(5,7,9,.78);
+      backdrop-filter:blur(8px);
+    }
+
+    .success-modal.is-visible{
+      display:flex;
+    }
+
+    .success-modal-card{
+      width:min(100%, 460px);
+      padding:30px;
+      text-align:center;
+      background:var(--panel);
+      border:1px solid rgba(214,255,75,.28);
+      border-radius:22px;
+      box-shadow:var(--shadow);
+    }
+
+    .success-modal-icon{
+      width:58px;
+      height:58px;
+      margin:0 auto 18px;
+      display:grid;
+      place-items:center;
+      border-radius:50%;
+      background:var(--accent);
+      color:var(--bg);
+      font-size:1.65rem;
+      font-weight:900;
+    }
+
+    .success-modal-card h3{
+      margin-bottom:10px;
+    }
+
+    .success-modal-card p{
+      color:var(--muted);
+      margin-bottom:22px;
+    }
+
+    .success-modal-card .btn{
+      min-width:120px;
+    }
+
     footer{
       padding:36px 0;
       color:var(--muted-2);
@@ -1048,6 +1101,25 @@
     </section>
   </main>
 
+
+  <div
+    id="successModal"
+    class="success-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="successModalTitle"
+    aria-describedby="successModalText"
+  >
+    <div class="success-modal-card">
+      <div class="success-modal-icon">✓</div>
+      <h3 id="successModalTitle">Pedido enviado com sucesso</h3>
+      <p id="successModalText">
+        Recebemos a sua mensagem. Entraremos em contacto assim que possível.
+      </p>
+      <button id="closeSuccessModal" class="btn btn-primary" type="button">OK</button>
+    </div>
+  </div>
+
   <footer>
     <div class="container footer-inner">
       <div>© <span id="year"></span> Undersoft. Todos os direitos reservados.</div>
@@ -1061,6 +1133,8 @@
     const contactForm = document.getElementById("contactForm");
     const formStatus = document.getElementById("formStatus");
     const submitButton = contactForm.querySelector('button[type="submit"]');
+    const successModal = document.getElementById("successModal");
+    const closeSuccessModal = document.getElementById("closeSuccessModal");
 
     contactForm.addEventListener("submit", async function(event) {
       event.preventDefault();
@@ -1092,9 +1166,9 @@
         }
 
         contactForm.reset();
-        formStatus.textContent =
-          "Pedido enviado com sucesso. Entraremos em contacto assim que possível.";
-        formStatus.style.display = "block";
+        formStatus.style.display = "none";
+        successModal.classList.add("is-visible");
+        closeSuccessModal.focus();
       } catch (error) {
         formStatus.textContent =
           "Não foi possível enviar o pedido. Tente novamente ou escreva para contacto@undersoft.pt.";
@@ -1104,6 +1178,26 @@
         submitButton.textContent = "Enviar pedido";
       }
     });
+
+    closeSuccessModal.addEventListener("click", function() {
+      successModal.classList.remove("is-visible");
+      submitButton.focus();
+    });
+
+    successModal.addEventListener("click", function(event) {
+      if (event.target === successModal) {
+        successModal.classList.remove("is-visible");
+        submitButton.focus();
+      }
+    });
+
+    document.addEventListener("keydown", function(event) {
+      if (event.key === "Escape" && successModal.classList.contains("is-visible")) {
+        successModal.classList.remove("is-visible");
+        submitButton.focus();
+      }
+    });
+
   </script>
 </body>
 </html>
