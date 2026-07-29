@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A Undersoft automatiza processos empresariais sem obrigar a sua equipa a abandonar as ferramentas que já utiliza." />
+  <title>Undersoft — Automação sem complicação</title>
+
+  <style>
+    :root{
+      --bg:#0d0f12;
+      --bg-soft:#14181d;
+      --panel:#191e24;
+      --panel-2:#111419;
+      --line:#2a3139;
+      --text:#f3f5f7;
+      --muted:#aab3bd;
+      --muted-2:#7f8994;
+      --accent:#d6ff4b;
+      --accent-dark:#1d2604;
+      --danger:#ff7272;
+      --max:1180px;
+      --radius:18px;
+      --shadow:0 18px 50px rgba(0,0,0,.28);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(214,255,75,.08), transparent 28%),
+        radial-gradient(circle at 85% 20%, rgba(255,255,255,.04), transparent 26%),
+        var(--bg);
+      color:var(--text);
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height:1.6;
+    }
+
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+
+    .container{
+      width:min(calc(100% - 40px), var(--max));
+      margin:0 auto;
+    }
+
+    .nav{
+      position:sticky;
+      top:0;
+      z-index:50;
+      backdrop-filter:blur(18px);
+      background:rgba(13,15,18,.76);
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+
+    .nav-inner{
+      min-height:72px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:24px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-weight:800;
+      letter-spacing:.04em;
+    }
+
+    .brand-mark{
+      width:36px;
+      height:36px;
+      border-radius:10px;
+      background:linear-gradient(135deg,var(--accent),#8fbf00);
+      color:#0b0d0f;
+      display:grid;
+      place-items:center;
+      font-weight:900;
+      box-shadow:0 0 0 5px rgba(214,255,75,.08);
+    }
+
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:24px;
+      color:var(--muted);
+      font-size:.95rem;
+    }
+
+    .nav-links a:hover{color:var(--text)}
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      min-height:48px;
+      padding:0 20px;
+      border-radius:12px;
+      border:1px solid transparent;
+      font-weight:750;
+      transition:.2s ease;
+      cursor:pointer;
+    }
+
+    .btn-primary{
+      background:var(--accent);
+      color:#0d0f12;
+      box-shadow:0 10px 30px rgba(214,255,75,.13);
+    }
+
+    .btn-primary:hover{
+      transform:translateY(-2px);
+      filter:brightness(1.04);
+    }
+
+    .btn-secondary{
+      border-color:var(--line);
+      color:var(--text);
+      background:rgba(255,255,255,.02);
+    }
+
+    .btn-secondary:hover{
+      border-color:#495360;
+      background:rgba(255,255,255,.04);
+    }
+
+    .hero{
+      padding:104px 0 76px;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:56px;
+      align-items:center;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 11px;
+      border:1px solid rgba(214,255,75,.24);
+      background:rgba(214,255,75,.06);
+      color:#ddff74;
+      border-radius:999px;
+      font-size:.86rem;
+      font-weight:700;
+      margin-bottom:24px;
+    }
+
+    .dot{
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:var(--accent);
+      box-shadow:0 0 18px rgba(214,255,75,.8);
+    }
+
+    h1,h2,h3,p{margin-top:0}
+
+    h1{
+      font-size:clamp(2.75rem,6vw,5.5rem);
+      line-height:.98;
+      letter-spacing:-.055em;
+      margin-bottom:24px;
+      max-width:900px;
+    }
+
+    .hero p{
+      color:var(--muted);
+      font-size:1.15rem;
+      max-width:700px;
+      margin-bottom:30px;
+    }
+
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      margin-bottom:24px;
+    }
+
+    .microcopy{
+      color:var(--muted-2);
+      font-size:.9rem;
+    }
+
+    .hero-card{
+      background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:24px;
+      padding:24px;
+      box-shadow:var(--shadow);
+    }
+
+    .window-bar{
+      display:flex;
+      gap:7px;
+      margin-bottom:20px;
+    }
+
+    .window-bar span{
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background:#353c45;
+    }
+
+    .flow{
+      display:grid;
+      gap:12px;
+    }
+
+    .flow-step{
+      padding:16px;
+      border:1px solid var(--line);
+      background:var(--panel-2);
+      border-radius:14px;
+    }
+
+    .flow-step strong{
+      display:block;
+      margin-bottom:4px;
+    }
+
+    .flow-step small{color:var(--muted)}
+    .flow-arrow{text-align:center;color:var(--accent);font-size:1.3rem}
+
+    section{
+      padding:84px 0;
+      border-top:1px solid rgba(255,255,255,.055);
+    }
+
+    .section-head{
+      display:flex;
+      align-items:end;
+      justify-content:space-between;
+      gap:30px;
+      margin-bottom:38px;
+    }
+
+    .section-head h2{
+      margin-bottom:0;
+      font-size:clamp(2rem,4vw,3.4rem);
+      letter-spacing:-.035em;
+      max-width:760px;
+      line-height:1.07;
+    }
+
+    .section-head p{
+      color:var(--muted);
+      max-width:520px;
+      margin-bottom:2px;
+    }
+
+    .problem-grid,
+    .service-grid,
+    .benefit-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
+
+    .card{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:24px;
+      box-shadow:0 12px 30px rgba(0,0,0,.12);
+    }
+
+    .card-icon{
+      width:42px;
+      height:42px;
+      border-radius:12px;
+      display:grid;
+      place-items:center;
+      background:rgba(214,255,75,.08);
+      border:1px solid rgba(214,255,75,.15);
+      color:var(--accent);
+      font-size:1.2rem;
+      margin-bottom:18px;
+    }
+
+    .card h3{margin-bottom:10px}
+    .card p{color:var(--muted);margin-bottom:0}
+
+    .split{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:34px;
+      align-items:start;
+    }
+
+    .compare{
+      padding:26px;
+      border-radius:var(--radius);
+      border:1px solid var(--line);
+      background:var(--panel);
+    }
+
+    .compare.bad{border-color:rgba(255,114,114,.22)}
+    .compare.good{border-color:rgba(214,255,75,.25)}
+
+    .compare ul{
+      list-style:none;
+      margin:18px 0 0;
+      padding:0;
+      display:grid;
+      gap:12px;
+    }
+
+    .compare li{
+      display:flex;
+      gap:10px;
+      color:var(--muted);
+    }
+
+    .compare.good li::before{content:"✓";color:var(--accent);font-weight:800}
+    .compare.bad li::before{content:"×";color:var(--danger);font-weight:800}
+
+    .timeline{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:14px;
+    }
+
+    .timeline-item{
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:20px;
+      background:var(--panel-2);
+      position:relative;
+    }
+
+    .timeline-item span{
+      display:inline-grid;
+      place-items:center;
+      width:34px;
+      height:34px;
+      border-radius:50%;
+      background:var(--accent);
+      color:#111;
+      font-weight:900;
+      margin-bottom:16px;
+    }
+
+    .timeline-item p{color:var(--muted);font-size:.94rem;margin-bottom:0}
+
+    .offer{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:24px;
+      align-items:stretch;
+    }
+
+    .offer-main{
+      background:linear-gradient(135deg,rgba(214,255,75,.11),rgba(214,255,75,.025));
+      border:1px solid rgba(214,255,75,.23);
+      border-radius:24px;
+      padding:34px;
+    }
+
+    .offer-main h2{
+      font-size:clamp(2rem,4vw,3.2rem);
+      line-height:1.08;
+      letter-spacing:-.035em;
+    }
+
+    .offer-main p{color:var(--muted);max-width:680px}
+
+    .price-box{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      border:1px solid var(--line);
+      background:var(--panel);
+      border-radius:24px;
+      padding:30px;
+    }
+
+    .price{
+      font-size:3.2rem;
+      font-weight:900;
+      letter-spacing:-.06em;
+      line-height:1;
+      margin:8px 0 12px;
+    }
+
+    .price-box small{color:var(--muted)}
+
+    .case{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:24px;
+      padding:30px;
+    }
+
+    .case-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+      margin-top:24px;
+    }
+
+    .metric{
+      background:var(--panel-2);
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:18px;
+    }
+
+    .metric strong{
+      display:block;
+      font-size:1.25rem;
+      margin-bottom:6px;
+    }
+
+    .metric span{color:var(--muted);font-size:.92rem}
+
+    .cta{
+      text-align:center;
+      padding:74px 30px;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(214,255,75,.16), transparent 42%),
+        var(--panel);
+      border:1px solid var(--line);
+      border-radius:28px;
+    }
+
+    .cta h2{
+      font-size:clamp(2.2rem,5vw,4.2rem);
+      line-height:1.03;
+      letter-spacing:-.05em;
+      max-width:820px;
+      margin-left:auto;
+      margin-right:auto;
+    }
+
+    .cta p{
+      color:var(--muted);
+      max-width:620px;
+      margin:0 auto 28px;
+    }
+
+    footer{
+      padding:36px 0;
+      color:var(--muted-2);
+      font-size:.9rem;
+    }
+
+    .footer-inner{
+      display:flex;
+      justify-content:space-between;
+      gap:24px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+
+    .mobile-menu{display:none}
+
+    @media (max-width: 980px){
+      .hero-grid,.split,.offer{grid-template-columns:1fr}
+      .problem-grid,.service-grid,.benefit-grid{grid-template-columns:repeat(2,1fr)}
+      .timeline{grid-template-columns:repeat(2,1fr)}
+      .section-head{align-items:start;flex-direction:column}
+    }
+
+    @media (max-width: 720px){
+      .nav-links{display:none}
+      .mobile-menu{display:inline-flex}
+      .hero{padding-top:72px}
+      .problem-grid,.service-grid,.benefit-grid,.timeline,.case-grid{grid-template-columns:1fr}
+      .container{width:min(calc(100% - 28px), var(--max))}
+      .hero-actions{flex-direction:column}
+      .btn{width:100%}
+      section{padding:64px 0}
+      .price-box{min-height:240px}
+    }
+  </style>
+</head>
+
+<body>
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="#top" class="brand" aria-label="Undersoft">
+        <span class="brand-mark">U</span>
+        <span>UNDERSOFT</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Navegação principal">
+        <a href="#problema">Problema</a>
+        <a href="#solucao">Solução</a>
+        <a href="#processo">Processo</a>
+        <a href="#diagnostico">Diagnóstico</a>
+      </nav>
+
+      <a class="btn btn-primary mobile-menu" href="#contacto">Contactar</a>
+      <a class="btn btn-primary nav-links" href="#contacto">Pedir diagnóstico</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow"><span class="dot"></span> Automação prática para PME</div>
+          <h1>Automatize processos sem deitar fora o que já funciona.</h1>
+          <p>
+            A Undersoft melhora os processos que a sua empresa já utiliza,
+            ligando Excel, bases de dados e ferramentas internas a automações feitas à medida.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#contacto">Analisar o meu processo</a>
+            <a class="btn btn-secondary" href="#solucao">Ver como funciona</a>
+          </div>
+
+          <div class="microcopy">
+            Sem ERP obrigatório. Sem migrações desnecessárias. Sem formação interminável.
+          </div>
+        </div>
+
+        <div class="hero-card" aria-label="Exemplo de fluxo de automação">
+          <div class="window-bar"><span></span><span></span><span></span></div>
+          <div class="flow">
+            <div class="flow-step">
+              <strong>1. A sua equipa trabalha como sempre</strong>
+              <small>Excel, formulários ou processos já conhecidos.</small>
+            </div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-step">
+              <strong>2. A Undersoft valida e automatiza</strong>
+              <small>Regras, cálculos, integrações e controlo.</small>
+            </div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-step">
+              <strong>3. O resultado volta pronto</strong>
+              <small>Menos erros, menos trabalho e mais controlo.</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="problema">
+      <div class="container">
+        <div class="section-head">
+          <h2>O problema não é usar Excel. É depender de trabalho manual.</h2>
+          <p>
+            Muitas empresas já têm processos que funcionam. O desperdício aparece quando tudo depende
+            de copiar, conferir, corrigir e repetir.
+          </p>
+        </div>
+
+        <div class="problem-grid">
+          <article class="card">
+            <div class="card-icon">⧉</div>
+            <h3>Informação duplicada</h3>
+            <p>Os mesmos dados são copiados entre ficheiros, emails e sistemas diferentes.</p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">!</div>
+            <h3>Erros evitáveis</h3>
+            <p>Campos incorretos, versões desatualizadas e validações feitas apenas no final.</p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">⌛</div>
+            <h3>Tempo desperdiçado</h3>
+            <p>Horas consumidas em tarefas repetitivas que poderiam ser executadas automaticamente.</p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">1</div>
+            <h3>Dependência de pessoas</h3>
+            <p>Processos críticos ficam concentrados em quem conhece os ficheiros e os atalhos.</p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">↺</div>
+            <h3>Retrabalho constante</h3>
+            <p>Problemas simples transformam-se em correções, chamadas e conferências manuais.</p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">?</div>
+            <h3>Falta de controlo</h3>
+            <p>É difícil saber o que foi feito, por quem, quando e com base em que informação.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="solucao">
+      <div class="container">
+        <div class="section-head">
+          <h2>Melhoramos o processo antes de sugerir uma substituição.</h2>
+          <p>
+            A tecnologia adapta-se à operação da empresa. Não o contrário.
+          </p>
+        </div>
+
+        <div class="split">
+          <div class="compare bad">
+            <h3>O modelo tradicional</h3>
+            <ul>
+              <li>Trocar todas as ferramentas de uma só vez</li>
+              <li>Obrigar a equipa a aprender um novo sistema</li>
+              <li>Migrar dados sem necessidade real</li>
+              <li>Pagar por funcionalidades que não utiliza</li>
+              <li>Adaptar a empresa às limitações do software</li>
+            </ul>
+          </div>
+
+          <div class="compare good">
+            <h3>O modelo Undersoft</h3>
+            <ul>
+              <li>Manter as ferramentas que já funcionam</li>
+              <li>Automatizar apenas onde existe desperdício</li>
+              <li>Adicionar validações e regras específicas</li>
+              <li>Integrar Excel, bases de dados e APIs</li>
+              <li>Evoluir por fases, com controlo de investimento</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <h2>O que pode ser automatizado</h2>
+          <p>
+            A primeira versão da oferta deve concentrar-se em processos frequentes,
+            mensuráveis e fáceis de demonstrar.
+          </p>
+        </div>
+
+        <div class="service-grid">
+          <article class="card">
+            <div class="card-icon">€</div>
+            <h3>Orçamentação</h3>
+            <p>Geração, cálculo, validação e organização de propostas comerciais.</p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">⌘</div>
+            <h3>Cadastro de clientes</h3>
+            <p>Centralização de dados e redução de preenchimentos repetidos.</p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">✓</div>
+            <h3>Validação de dados</h3>
+            <p>Regras automáticas para impedir erros antes de entrarem no processo.</p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">⇄</div>
+            <h3>Integrações</h3>
+            <p>Ligação entre Excel, bases de dados, serviços online e APIs.</p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">▦</div>
+            <h3>Relatórios</h3>
+            <p>Informação consolidada, indicadores e acompanhamento de operações.</p>
+          </article>
+
+          <article class="card">
+            <div class="card-icon">⚙</div>
+            <h3>Processos internos</h3>
+            <p>Automação de tarefas administrativas que consomem tempo todos os dias.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="processo">
+      <div class="container">
+        <div class="section-head">
+          <h2>Um processo simples, sem promessa vaga.</h2>
+          <p>
+            Primeiro é preciso perceber o problema. Só depois faz sentido propor tecnologia.
+          </p>
+        </div>
+
+        <div class="timeline">
+          <article class="timeline-item">
+            <span>1</span>
+            <h3>Diagnóstico</h3>
+            <p>Mapeamento do processo, falhas, dependências e tempo consumido.</p>
+          </article>
+
+          <article class="timeline-item">
+            <span>2</span>
+            <h3>Prioridade</h3>
+            <p>Escolha da parte com maior impacto e menor risco de implementação.</p>
+          </article>
+
+          <article class="timeline-item">
+            <span>3</span>
+            <h3>Proposta</h3>
+            <p>Escopo, prazo, investimento e resultado esperado.</p>
+          </article>
+
+          <article class="timeline-item">
+            <span>4</span>
+            <h3>Implementação</h3>
+            <p>Desenvolvimento e integração sem interromper a operação atual.</p>
+          </article>
+
+          <article class="timeline-item">
+            <span>5</span>
+            <h3>Evolução</h3>
+            <p>Manutenção, novas regras e melhorias conforme a necessidade real.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="diagnostico">
+      <div class="container offer">
+        <div class="offer-main">
+          <div class="eyebrow"><span class="dot"></span> Primeira etapa</div>
+          <h2>Diagnóstico inicial do processo</h2>
+          <p>
+            Uma reunião objetiva para identificar onde a empresa perde tempo,
+            quais tarefas podem ser automatizadas e se existe viabilidade técnica e financeira.
+          </p>
+          <p>
+            O valor serve para filtrar pedidos sem compromisso e pode ser descontado
+            de uma implementação contratada.
+          </p>
+          <a class="btn btn-primary" href="#contacto">Solicitar diagnóstico</a>
+        </div>
+
+        <aside class="price-box">
+          <div>
+            <small>Investimento inicial</small>
+            <div class="price">20 €</div>
+            <small>Reunião de diagnóstico<br />com análise preliminar do processo</small>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="case">
+          <div class="section-head" style="margin-bottom:0">
+            <h2>Exemplo de aplicação</h2>
+            <p>
+              Este bloco deve ser substituído por um caso real assim que existir autorização
+              e dados verificáveis.
+            </p>
+          </div>
+
+          <div class="case-grid">
+            <div class="metric">
+              <strong>Antes</strong>
+              <span>Orçamentos dependentes de preenchimento e conferência manual.</span>
+            </div>
+            <div class="metric">
+              <strong>Implementação</strong>
+              <span>Regras automáticas, validação de dados e integração com a base existente.</span>
+            </div>
+            <div class="metric">
+              <strong>Resultado esperado</strong>
+              <span>Menos erros, resposta mais rápida e processo mais fácil de controlar.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto">
+      <div class="container">
+        <div class="cta">
+          <div class="eyebrow"><span class="dot"></span> Undersoft</div>
+          <h2>Continue a usar o que conhece. Automatize o que consome tempo.</h2>
+          <p>
+            Envie uma breve descrição do processo que pretende melhorar.
+            A primeira análise serve para determinar se existe uma solução prática.
+          </p>
+
+          <div class="hero-actions" style="justify-content:center;margin-bottom:0">
+            <a class="btn btn-primary" href="mailto:contacto@undersoft.pt?subject=Pedido%20de%20diagnóstico%20Undersoft">
+              Enviar pedido por email
+            </a>
+            <a class="btn btn-secondary" href="#top">Voltar ao início</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> Undersoft. Todos os direitos reservados.</div>
+      <div>Automação e gestão de processos empresariais.</div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
