@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/png" href="./favicon.png">
-  <link rel="shortcut icon" href="./favicon.ico">
   <meta name="description" content="A Undersoft automatiza processos empresariais sem obrigar a sua equipa a abandonar as ferramentas que já utiliza." />
   <title>Undersoft — Automação sem complicação</title>
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <link rel="icon" type="image/png" href="./favicon.png">
+  <link rel="shortcut icon" href="./favicon.ico">
 
   <style>
     :root{
@@ -447,7 +448,17 @@
       margin-bottom:6px;
     }
 
-    .metric span{color:var(--muted);font-size:.92rem}
+    .metric span{
+      display:block;
+      color:var(--muted);
+      font-size:.92rem;
+      line-height:1.7;
+    }
+
+    .metric .case-highlight{
+      color:var(--accent);
+      font-weight:800;
+    }
 
     .cta{
       text-align:center;
@@ -1054,24 +1065,37 @@
         <div class="case">
           <div class="section-head" style="margin-bottom:0">
             <h2>Exemplo de aplicação</h2>
-            <p>
-              Este bloco deve ser substituído por um caso real assim que existir autorização
-              e dados verificáveis.
-            </p>
           </div>
 
           <div class="case-grid">
             <div class="metric">
               <strong>Antes</strong>
-              <span>Orçamentos dependentes de preenchimento e conferência manual.</span>
+              <span>
+                As imagens eram guardadas no Excel e copiadas uma a uma para cada orçamento.
+                As informações dos produtos também eram preenchidas manualmente.
+                O processo demorava entre
+                <b class="case-highlight">40 minutos e mais de 1 hora</b>.
+              </span>
             </div>
+
             <div class="metric">
-              <strong>Implementação</strong>
-              <span>Regras automáticas, validação de dados e integração com a base existente.</span>
+              <strong>O que foi feito</strong>
+              <span>
+                Automatizámos a inserção das imagens e das informações dos materiais.
+                Também criámos a geração automática de versões dos orçamentos
+                e o registo de clientes.
+              </span>
             </div>
+
             <div class="metric">
-              <strong>Resultado esperado</strong>
-              <span>Menos erros, resposta mais rápida e processo mais fácil de controlar.</span>
+              <strong>Resultado</strong>
+              <span>
+                Os orçamentos de produtos standard passaram a ser feitos em
+                <b class="case-highlight">menos de 5 minutos</b>.
+                O valor anual de orçamentos emitidos passou de cerca de
+                <b class="case-highlight">400 mil euros</b> para
+                <b class="case-highlight">mais de 6 milhões de euros</b>.
+              </span>
             </div>
           </div>
         </div>
