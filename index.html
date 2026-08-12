@@ -11,20 +11,21 @@
 
   <style>
     :root{
-      --bg:#0d0f12;
-      --bg-soft:#14181d;
-      --panel:#191e24;
-      --panel-2:#111419;
-      --line:#2a3139;
-      --text:#f3f5f7;
-      --muted:#aab3bd;
-      --muted-2:#7f8994;
-      --accent:#d6ff4b;
-      --accent-dark:#1d2604;
-      --danger:#ff7272;
+      --bg:#fff8f2;
+      --bg-soft:#fff1e6;
+      --panel:#ffffff;
+      --panel-2:#fff1e6;
+      --line:#f0ddce;
+      --text:#181310;
+      --muted:#6b6058;
+      --muted-2:#a89c90;
+      --accent:#ff5a1f;
+      --accent-soft:rgba(255,90,31,.09);
+      --accent-dark:#c73f10;
+      --danger:#d64545;
       --max:1180px;
       --radius:18px;
-      --shadow:0 18px 50px rgba(0,0,0,.28);
+      --shadow:0 18px 45px rgba(120,60,20,.10);
     }
 
     *{box-sizing:border-box}
@@ -32,9 +33,9 @@
     body{
       margin:0;
       background:
-        radial-gradient(circle at 15% 10%, rgba(214,255,75,.08), transparent 28%),
-        radial-gradient(circle at 85% 20%, rgba(255,255,255,.04), transparent 26%),
-        var(--bg);
+        radial-gradient(circle at 88% 6%, rgba(255,122,54,.38), transparent 42%),
+        radial-gradient(circle at 10% 28%, rgba(255,178,120,.22), transparent 46%),
+        linear-gradient(180deg, #fffaf6 0%, #fff3ea 55%, #ffe6d4 100%);
       color:var(--text);
       font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       line-height:1.6;
@@ -53,8 +54,8 @@
       top:0;
       z-index:50;
       backdrop-filter:blur(18px);
-      background:rgba(13,15,18,.76);
-      border-bottom:1px solid rgba(255,255,255,.06);
+      background:rgba(255,250,246,.78);
+      border-bottom:1px solid rgba(20,10,0,.06);
     }
 
     .nav-inner{
@@ -83,41 +84,13 @@
       overflow:hidden;
       border:1.5px solid var(--accent);
       border-radius:11px;
-      background:
-        radial-gradient(
-          circle at center,
-          #11151a 0%,
-          #11151a 54%,
-          rgba(214,255,75,.035) 72%,
-          rgba(214,255,75,.13) 100%
-        );
+      background:#fff;
       color:var(--accent);
       font-weight:900;
       line-height:1;
-      text-shadow:
-        0 0 5px rgba(214,255,75,.55),
-        0 0 11px rgba(214,255,75,.24);
       box-shadow:
-        0 0 0 1px rgba(214,255,75,.16),
-        0 0 8px rgba(214,255,75,.26),
-        0 0 18px rgba(143,191,0,.16),
-        inset 0 0 10px rgba(214,255,75,.08);
-    }
-
-    .brand-mark::before{
-      content:"";
-      position:absolute;
-      inset:-45%;
-      z-index:-1;
-      border-radius:50%;
-      background:radial-gradient(
-        circle,
-        transparent 0 42%,
-        rgba(214,255,75,.035) 62%,
-        rgba(214,255,75,.15) 78%,
-        transparent 100%
-      );
-      pointer-events:none;
+        0 0 0 1px rgba(255,90,31,.10),
+        0 6px 16px rgba(255,90,31,.16);
     }
 
     .nav-links{
@@ -154,24 +127,24 @@
 
     .btn-primary{
       background:var(--accent);
-      color:#0d0f12;
-      box-shadow:0 10px 30px rgba(214,255,75,.13);
+      color:#fff;
+      box-shadow:0 10px 26px rgba(255,90,31,.28);
     }
 
     .btn-primary:hover{
       transform:translateY(-2px);
-      filter:brightness(1.04);
+      filter:brightness(1.05);
     }
 
     .btn-secondary{
       border-color:var(--line);
       color:var(--text);
-      background:rgba(255,255,255,.02);
+      background:#fff;
     }
 
     .btn-secondary:hover{
-      border-color:#495360;
-      background:rgba(255,255,255,.04);
+      border-color:rgba(255,90,31,.35);
+      background:var(--accent-soft);
     }
 
     .hero{
@@ -190,9 +163,9 @@
       align-items:center;
       gap:8px;
       padding:7px 11px;
-      border:1px solid rgba(214,255,75,.24);
-      background:rgba(214,255,75,.06);
-      color:#ddff74;
+      border:1px solid rgba(255,90,31,.24);
+      background:rgba(255,90,31,.08);
+      color:var(--accent-dark);
       border-radius:999px;
       font-size:.86rem;
       font-weight:700;
@@ -204,7 +177,7 @@
       height:8px;
       border-radius:50%;
       background:var(--accent);
-      box-shadow:0 0 18px rgba(214,255,75,.8);
+      box-shadow:0 0 14px rgba(255,90,31,.6);
     }
 
     h1,h2,h3,p{margin-top:0}
@@ -215,6 +188,15 @@
       letter-spacing:-.055em;
       margin-bottom:24px;
       max-width:900px;
+    }
+
+    .hl{
+      background:#ffe1c8;
+      color:var(--accent-dark);
+      padding:.02em .16em;
+      border-radius:.22em;
+      box-decoration-break:clone;
+      -webkit-box-decoration-break:clone;
     }
 
     .hero p{
@@ -237,8 +219,8 @@
     }
 
     .hero-card{
-      background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.02));
-      border:1px solid rgba(255,255,255,.08);
+      background:#ffffff;
+      border:1px solid var(--line);
       border-radius:24px;
       padding:24px;
       box-shadow:var(--shadow);
@@ -254,7 +236,7 @@
       width:10px;
       height:10px;
       border-radius:50%;
-      background:#353c45;
+      background:#eddbcd;
     }
 
     .flow{
@@ -279,7 +261,7 @@
 
     section{
       padding:84px 0;
-      border-top:1px solid rgba(255,255,255,.055);
+      border-top:1px solid rgba(20,10,0,.05);
     }
 
     .section-head{
@@ -317,7 +299,7 @@
       border:1px solid var(--line);
       border-radius:var(--radius);
       padding:24px;
-      box-shadow:0 12px 30px rgba(0,0,0,.12);
+      box-shadow:0 12px 28px rgba(120,60,20,.06);
     }
 
     .card-icon{
@@ -326,8 +308,8 @@
       border-radius:12px;
       display:grid;
       place-items:center;
-      background:rgba(214,255,75,.08);
-      border:1px solid rgba(214,255,75,.15);
+      background:var(--accent-soft);
+      border:1px solid rgba(255,90,31,.22);
       color:var(--accent);
       font-size:1.2rem;
       margin-bottom:18px;
@@ -350,8 +332,8 @@
       background:var(--panel);
     }
 
-    .compare.bad{border-color:rgba(255,114,114,.22)}
-    .compare.good{border-color:rgba(214,255,75,.25)}
+    .compare.bad{border-color:rgba(214,69,69,.28)}
+    .compare.good{border-color:rgba(255,90,31,.3)}
 
     .compare ul{
       list-style:none;
@@ -380,7 +362,7 @@
       border:1px solid var(--line);
       border-radius:16px;
       padding:20px;
-      background:var(--panel-2);
+      background:var(--panel);
       position:relative;
     }
 
@@ -391,7 +373,7 @@
       height:34px;
       border-radius:50%;
       background:var(--accent);
-      color:#111;
+      color:#fff;
       font-weight:900;
       margin-bottom:16px;
     }
@@ -406,8 +388,8 @@
     }
 
     .offer-main{
-      background:linear-gradient(135deg,rgba(214,255,75,.11),rgba(214,255,75,.025));
-      border:1px solid rgba(214,255,75,.23);
+      background:linear-gradient(135deg,rgba(255,90,31,.13),rgba(255,90,31,.02));
+      border:1px solid rgba(255,90,31,.25);
       border-radius:24px;
       padding:34px;
     }
@@ -457,18 +439,16 @@
       user-select:none;
       pointer-events:none;
       filter:
-        drop-shadow(0 0 8px rgba(214,255,75,.20))
-        drop-shadow(0 0 18px rgba(214,255,75,.10));
+        drop-shadow(0 0 8px rgba(255,90,31,.18))
+        drop-shadow(0 0 16px rgba(255,90,31,.10));
     }
 
     .metric strong{
       display:block;
-      color:var(--accent);
+      color:var(--accent-dark);
       font-size:1.25rem;
       line-height:1.2;
       margin:0;
-      text-shadow:
-        0 0 10px rgba(214,255,75,.10);
     }
 
     .metric span{
@@ -479,7 +459,7 @@
     }
 
     .metric .case-highlight{
-      color:var(--accent);
+      color:var(--accent-dark);
       font-weight:800;
     }
 
@@ -487,7 +467,7 @@
       text-align:center;
       padding:74px 30px;
       background:
-        radial-gradient(circle at 50% 0%, rgba(214,255,75,.16), transparent 42%),
+        radial-gradient(circle at 50% 0%, rgba(255,90,31,.16), transparent 42%),
         var(--panel);
       border:1px solid var(--line);
       border-radius:28px;
@@ -522,7 +502,7 @@
       border:1px solid var(--line);
       border-radius:24px;
       padding:30px;
-      box-shadow:0 12px 30px rgba(0,0,0,.12);
+      box-shadow:0 12px 28px rgba(120,60,20,.06);
     }
 
     .contact-form-card h2,
@@ -589,8 +569,8 @@
     .form-group input:focus,
     .form-group textarea:focus,
     .form-group select:focus{
-      border-color:rgba(214,255,75,.65);
-      box-shadow:0 0 0 4px rgba(214,255,75,.08);
+      border-color:rgba(255,90,31,.55);
+      box-shadow:0 0 0 4px rgba(255,90,31,.10);
     }
 
     .consent{
@@ -616,9 +596,9 @@
       display:none;
       padding:12px 14px;
       border-radius:12px;
-      border:1px solid rgba(214,255,75,.22);
-      background:rgba(214,255,75,.06);
-      color:#ddff74;
+      border:1px solid rgba(255,90,31,.24);
+      background:rgba(255,90,31,.08);
+      color:var(--accent-dark);
       font-size:.9rem;
     }
 
@@ -640,7 +620,7 @@
     }
 
     .contact-item:hover{
-      border-color:rgba(214,255,75,.32);
+      border-color:rgba(255,90,31,.35);
       transform:translateY(-2px);
     }
 
@@ -651,8 +631,8 @@
       border-radius:12px;
       display:grid;
       place-items:center;
-      background:rgba(214,255,75,.08);
-      border:1px solid rgba(214,255,75,.15);
+      background:var(--accent-soft);
+      border:1px solid rgba(255,90,31,.22);
       color:var(--accent);
       font-weight:900;
     }
@@ -694,7 +674,7 @@
       align-items:center;
       justify-content:center;
       padding:20px;
-      background:rgba(5,7,9,.78);
+      background:rgba(40,20,10,.45);
       backdrop-filter:blur(8px);
     }
 
@@ -707,7 +687,7 @@
       padding:30px;
       text-align:center;
       background:var(--panel);
-      border:1px solid rgba(214,255,75,.28);
+      border:1px solid rgba(255,90,31,.3);
       border-radius:22px;
       box-shadow:var(--shadow);
     }
@@ -720,7 +700,7 @@
       place-items:center;
       border-radius:50%;
       background:var(--accent);
-      color:var(--bg);
+      color:#fff;
       font-size:1.65rem;
       font-weight:900;
     }
@@ -749,7 +729,7 @@
     }
 
     .success-dialog::backdrop{
-      background:rgba(5,7,9,.82);
+      background:rgba(40,20,10,.45);
       backdrop-filter:blur(8px);
     }
 
@@ -757,7 +737,7 @@
       padding:30px;
       text-align:center;
       background:var(--panel);
-      border:1px solid rgba(214,255,75,.28);
+      border:1px solid rgba(255,90,31,.3);
       border-radius:22px;
       box-shadow:var(--shadow);
     }
@@ -770,7 +750,7 @@
       place-items:center;
       border-radius:50%;
       background:var(--accent);
-      color:var(--bg);
+      color:#fff;
       font-size:1.65rem;
       font-weight:900;
     }
@@ -850,7 +830,7 @@
       <div class="container hero-grid">
         <div>
           <div class="eyebrow"><span class="dot"></span> Menos trabalho manual no dia a dia</div>
-          <h1>Automatize processos sem deitar fora o que já funciona.</h1>
+          <h1>Automatize processos sem deitar fora <span class="hl">o que já funciona.</span></h1>
           <p>
             A Undersoft melhora os processos que a sua empresa já utiliza,
             ligando Excel, bases de dados e ferramentas internas a automações feitas à medida.
@@ -1218,12 +1198,20 @@
 
           <aside class="contact-info-card">
             <div class="eyebrow"><span class="dot"></span> Contactos</div>
-            <h3>Escolha o endereço adequado</h3>
+            <h3>Fale connosco diretamente</h3>
             <p>
-              Todos os endereços são geridos pela Undersoft e encaminhados para a caixa responsável.
+              Todos os canais abaixo são geridos pela Undersoft.
             </p>
 
             <div class="contact-list">
+              <a class="contact-item" href="tel:+351912508157">
+                <span class="contact-icon">☎</span>
+                <span>
+                  <strong>+351 912 508 157</strong>
+                  <span>Chamada para a rede móvel nacional</span>
+                </span>
+              </a>
+
               <a class="contact-item" href="mailto:contacto@undersoft.pt">
                 <span class="contact-icon">@</span>
                 <span>
@@ -1232,19 +1220,11 @@
                 </span>
               </a>
 
-              <a class="contact-item" href="mailto:contacto@undersoft.pt">
-                <span class="contact-icon">?</span>
+              <a class="contact-item" href="https://undersoft.pt" target="_blank" rel="noopener">
+                <span class="contact-icon">⊕</span>
                 <span>
-                  <strong></strong>
-                  <span>Suporte e acompanhamento técnico</span>
-                </span>
-              </a>
-
-              <a class="contact-item" href="mailto:contacto@undersoft.pt">
-                <span class="contact-icon">U</span>
-                <span>
-                  <strong></strong>
-                  <span>Comunicações institucionais</span>
+                  <strong>undersoft.pt</strong>
+                  <span>Website</span>
                 </span>
               </a>
             </div>
