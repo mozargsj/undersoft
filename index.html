@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="A Undersoft automatiza processos empresariais sem obrigar a sua equipa a abandonar as ferramentas que já utiliza." />
   <title>Undersoft — Automação Empresarial</title>
-  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
   <link rel="icon" type="image/png" href="./favicon.png">
   <link rel="shortcut icon" href="./favicon.ico">
 
@@ -59,7 +58,7 @@
     }
 
     .nav-inner{
-      min-height:72px;
+      min-height:84px;
       display:flex;
       align-items:center;
       justify-content:space-between;
@@ -74,23 +73,10 @@
       letter-spacing:.04em;
     }
 
-    .brand-mark{
-      width:38px;
-      height:38px;
-      position:relative;
-      isolation:isolate;
-      display:grid;
-      place-items:center;
-      overflow:hidden;
-      border:1.5px solid var(--accent);
-      border-radius:11px;
-      background:#fff;
-      color:var(--accent);
-      font-weight:900;
-      line-height:1;
-      box-shadow:
-        0 0 0 1px rgba(255,90,31,.10),
-        0 6px 16px rgba(255,90,31,.16);
+    .brand-logo{
+      height:54px;
+      width:auto;
+      display:block;
     }
 
     .nav-links{
@@ -809,8 +795,7 @@
   <header class="nav">
     <div class="container nav-inner">
       <a href="#top" class="brand" aria-label="Undersoft">
-        <span class="brand-mark">U</span>
-        <span>UNDERSOFT</span>
+        <img class="brand-logo" src="assets/images/logo.svg" alt="Undersoft - Soluções Empresariais" />
       </a>
 
       <nav class="nav-links" aria-label="Navegação principal">
