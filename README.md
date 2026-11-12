@@ -20,6 +20,21 @@ npm run build
 npm run preview
 ```
 
+## Deploy (GitHub Pages)
+
+O site publica em `https://undersoft.pt` (domínio em `public/CNAME`).
+
+- Cada `git push` na `main` roda `.github/workflows/deploy.yml`: ele faz
+  `npm ci`, `npm run build` e publica a pasta `dist/`.
+- O Pages do repositório usa a fonte **GitHub Actions** (não "Deploy from a branch").
+  Com "Deploy from a branch" o Pages serve o código-fonte cru e o site não abre.
+- Para rodar o deploy sem commit: aba **Actions** > *Deploy para GitHub Pages* > *Run workflow*.
+- O formulário usa duas variáveis de build (ver `.env.example` e `worker/README.md`).
+  Defina-as em *Settings > Secrets and variables > Actions > Variables*:
+  `VITE_TURNSTILE_SITE_KEY` e `VITE_CONTACT_ENDPOINT`.
+  Sem elas, o formulário envia direto ao Formspree, sem captcha.
+- O DNS de `undersoft.pt` aponta para o GitHub Pages (IPs `185.199.108-111.153`).
+
 ## O que foi feito
 
 - Projeto novo em **Vite + React**, todo o `index.html` original foi
