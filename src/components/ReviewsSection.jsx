@@ -7,22 +7,22 @@ import { useI18n } from "../i18n/I18nContext";
 // Se for null/omitido, aparece só a sigla (iniciais do nome).
 const REVIEWS = [
   {
-    image: "public/avaliacoes/geocatia.webp",
+    image: "/avaliacoes/geocatia.webp",
   },
   {
-    image: "public/avaliacoes/karol.webp",
+    image: "/avaliacoes/karol.webp",
   },
   {
-    image: "public/avaliacoes/lucas.webp",
+    image: "/avaliacoes/lucas.webp",
   },
   {
-     image: "public/avaliacoes/robert.webp",
+     image: "/avaliacoes/robert.webp",
   },
   {
     image: null,
   },
   {
-    image: "public/avaliacoes/tomas.webp",
+    image: "/avaliacoes/tomas.webp",
   },
 ];
 
