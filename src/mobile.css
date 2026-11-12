@@ -660,7 +660,7 @@
 
   .demo-ma-panels-stack .scroll-stack-card.demo-ma-stack-item,
   .demo-ma-panels-stack .scroll-stack-card__shade {
-    border-radius: var(--r-lg);
+    border-radius: 44px 44px 34px 34px;
   }
 
   .demo-ma-system-panel {
@@ -668,7 +668,7 @@
     flex-direction: column !important;
     gap: min(2.5cqi, 10px) !important;
     padding: min(4.25cqi, 17px) !important;
-    border-radius: var(--r-lg) !important;
+    border-radius: 0 !important;
     width: 100% !important;
     height: auto !important;
     min-height: 0 !important;
