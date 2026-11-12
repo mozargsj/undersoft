@@ -1,0 +1,281 @@
+/* Popup de consentimento de cookies. Autónomo: usa px/rem e não depende das escalas em cqi do site. */
+
+.ut-cc-wrap {
+  position: fixed;
+  inset: auto 0 0 0;
+  z-index: 9000; /* acima do header (50) e do FAB (40); abaixo do loader (9999) */
+  display: flex;
+  justify-content: flex-start;
+  padding: 16px;
+  pointer-events: none; /* só o cartão recebe cliques */
+  container-type: inline-size; /* permite usar cqi (1cqi = 1% da largura da janela) no mobile */
+}
+
+.ut-cc {
+  pointer-events: auto;
+  width: min(100%, 460px);
+  max-height: calc(100dvh - 32px);
+  display: flex;
+  flex-direction: column;
+  padding: 22px;
+  color: #2e2420;
+  background: #fff;
+  border: 1px solid #e2e5e9;
+  border-radius: 22px;
+  box-shadow: 0 18px 50px rgba(15, 20, 25, 0.18);
+  font-family: "Geist", system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  animation: ut-cc-in 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.ut-cc:focus { outline: none; }
+.ut-cc.is-details { width: min(100%, 520px); }
+
+@keyframes ut-cc-in {
+  from { transform: translateY(calc(100% + 24px)); }
+  to { transform: none; }
+}
+
+/* Conteúdo de cada vista (simples / preferências): entra com fade + slide ao trocar */
+.ut-cc-view {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  animation: ut-cc-view-in 0.32s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+@keyframes ut-cc-view-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+.ut-cc-title {
+  margin: 0 0 8px;
+  font-size: 20px;
+  line-height: 1.25;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.ut-cc-text {
+  margin: 0 0 16px;
+  color: #666563;
+  font-size: 14.5px;
+}
+.ut-cc-text a {
+  color: #2e2420;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.ut-cc-text a:hover { color: #ff5220; }
+
+/* Aceitar e Rejeitar: mesmo tamanho, forma e peso (sem botão "escondido"). */
+.ut-cc-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.ut-cc-actions-3 { grid-template-columns: 1fr 1fr; }
+.ut-cc-actions-3 .ut-cc-btn-save { grid-column: 1 / -1; }
+
+.ut-cc-btn {
+  min-height: 46px;
+  padding: 0 16px;
+  border-radius: 200px;
+  border: 1px solid transparent;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+.ut-cc-btn:hover { transform: translateY(-1px); }
+.ut-cc-btn:focus-visible,
+.ut-cc-link:focus-visible,
+.ut-cc-switch input:focus-visible + .ut-cc-slider {
+  outline: 2px solid #ff5220;
+  outline-offset: 2px;
+}
+
+.ut-cc-btn-accept { color: #fff; background: #ff5220; }
+/* Rejeitar: mesmo peso visual que Aceitar (fundo cheio e contraste alto), para cumprir a "igual proeminência". */
+.ut-cc-btn-reject { color: #ff5220; background: transparent; border: 1px solid #ff5220; }
+.ut-cc-btn-save { color: #2e2420; background: #fff; border-color: #cfd3d8; }
+.ut-cc-btn-save:hover { border-color: #2e2420; }
+
+.ut-cc-link {
+  align-self: center;
+  margin-top: 12px;
+  padding: 4px 8px;
+  border: 0;
+  background: none;
+  color: #2e2420;
+  font: inherit;
+  font-size: 14px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.ut-cc-link:hover { color: #ff5220; }
+
+/* Lista de categorias (painel "Personalizar") */
+.ut-cc-list {
+  margin: 0 -6px 16px;
+  padding: 0 6px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  display: grid;
+  gap: 10px;
+}
+
+/* Barra de scroll clara e arredondada */
+.ut-cc-list::-webkit-scrollbar { width: 8px; }
+.ut-cc-list::-webkit-scrollbar-track { background: transparent; margin: 6px 0; }
+.ut-cc-list::-webkit-scrollbar-thumb {
+  background: #d9dce1;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+.ut-cc-list::-webkit-scrollbar-thumb:hover { background: #c3c8cf; background-clip: padding-box; }
+@supports not selector(::-webkit-scrollbar) {
+  .ut-cc-list { scrollbar-width: thin; scrollbar-color: #d9dce1 transparent; }
+}
+.ut-cc-item {
+  padding: 14px 16px;
+  background: #f3f3f3;
+  border-radius: 16px;
+}
+.ut-cc-item-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.ut-cc-item-title {
+  flex: 1;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+}
+.ut-cc-always {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #4d6b00;
+  background: #eaf5c8;
+  border-radius: 200px;
+  padding: 2px 10px;
+  white-space: nowrap;
+}
+.ut-cc-item-text {
+  margin: 6px 0 0;
+  color: #666563;
+  font-size: 13.5px;
+}
+
+/* Interruptor (checkbox nativo, acessível por teclado e leitores de ecrã) */
+.ut-cc-switch {
+  position: relative;
+  flex: none;
+  width: 44px;
+  height: 26px;
+}
+.ut-cc-switch input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 1;
+}
+.ut-cc-switch input:disabled { cursor: not-allowed; }
+.ut-cc-slider {
+  position: absolute;
+  inset: 0;
+  border-radius: 200px;
+  background: #b9bec5;
+  transition: background-color 0.2s ease;
+}
+.ut-cc-slider::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease;
+}
+.ut-cc-switch input:checked + .ut-cc-slider { background: #ff5220; }
+.ut-cc-switch input:checked + .ut-cc-slider::after { transform: translateX(18px); }
+.ut-cc-switch input:disabled + .ut-cc-slider { opacity: 0.55; }
+
+/* Link "Definições de cookies" no rodapé: igual aos outros links legais */
+.ut-footer .ut-footer-bottom-right .ut-cc-reopen {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
+  text-underline-position: from-font;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.ut-footer .ut-footer-bottom-right .ut-cc-reopen:hover {
+  opacity: 0.7;
+  text-decoration: underline;
+}
+
+/* Mobile: folha que sobe de baixo, em largura total e encostada ao fundo do ecrã */
+@media (max-width: 560px) {
+  .ut-cc-wrap { padding: 0; }
+  .ut-cc,
+  .ut-cc.is-details {
+    width: 100%;
+    max-height: 88dvh;
+    padding: 20px 18px calc(18px + env(safe-area-inset-bottom, 0px));
+    border-width: 1px 0 0;
+    border-radius: 22px 22px 0 0;
+    box-shadow: 0 -12px 40px rgba(15, 20, 25, 0.22);
+    animation: ut-cc-up 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+  .ut-cc-title { font-size: 18px; }
+  .ut-cc-text { margin-bottom: 14px; }
+}
+@keyframes ut-cc-up {
+  from { transform: translateY(100%); }
+  to { transform: none; }
+}
+
+/* Ecrãs até 400px: tamanhos proporcionais à largura (cqi), com mínimos para manter a leitura */
+@media (max-width: 400px) {
+  .ut-cc,
+  .ut-cc.is-details {
+    padding: 5cqi 4.5cqi calc(4.5cqi + env(safe-area-inset-bottom, 0px));
+    border-radius: 5.5cqi 5.5cqi 0 0;
+    font-size: max(13px, 3.75cqi);
+  }
+  .ut-cc-title { margin-bottom: 1.5cqi; font-size: max(16px, 4.75cqi); }
+  .ut-cc-text { margin-bottom: 3.5cqi; font-size: max(13px, 3.5cqi); }
+  .ut-cc-actions { gap: 2.5cqi; }
+  .ut-cc-btn { min-height: max(42px, 11.5cqi); padding: 0 3cqi; font-size: max(14px, 3.75cqi); }
+  .ut-cc-link { margin-top: 2.5cqi; font-size: max(13px, 3.5cqi); }
+  .ut-cc-list { gap: 2.5cqi; margin-bottom: 3.5cqi; }
+  .ut-cc-item { padding: 3.5cqi 4cqi; border-radius: 4cqi; }
+  .ut-cc-item-head { gap: 2.5cqi; }
+  .ut-cc-item-title { font-size: max(14px, 3.75cqi); }
+  .ut-cc-item-text { margin-top: 1.5cqi; font-size: max(12.5px, 3.25cqi); }
+  .ut-cc-always { padding: 0.5cqi 2.5cqi; font-size: max(11.5px, 3cqi); }
+  .ut-cc-switch { width: max(40px, 11cqi); height: max(24px, 6.5cqi); }
+  .ut-cc-slider::after { top: 0.75cqi; left: 0.75cqi; width: calc(max(24px, 6.5cqi) - 1.5cqi); height: calc(max(24px, 6.5cqi) - 1.5cqi); }
+  .ut-cc-switch input:checked + .ut-cc-slider::after { transform: translateX(calc(max(40px, 11cqi) - max(24px, 6.5cqi))); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ut-cc, .ut-cc.is-details, .ut-cc-view { animation: none; }
+  .ut-cc-btn, .ut-cc-slider, .ut-cc-slider::after { transition: none; }
+}

@@ -1,0 +1,1724 @@
+/* =====================================================================
+   MOBILE / TABLET (<= 1024px)
+   Organizado por seções, com espaçamentos limpos e tokens padronizados.
+   ===================================================================== */
+
+/* ---------------------------------------------------------------------
+   1. CONFIGURAÇÕES GLOBAIS E TOKENS
+   --------------------------------------------------------------------- */
+
+/* Base: itens exclusivos do mobile ficam escondidos no desktop */
+.nav-toggle,
+.nav-mobile {
+  display: none;
+}
+
+.ut-scope .ut-review-controls {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+@media (min-width: 730px) and (max-width: 1024px) {
+    .container {
+      margin-inline: 0 !important;
+      padding: 0 min(4.5cqi, 18px);
+    }
+}
+
+@media (max-width: 1024px) {
+  :root {
+    /* Tipografia (padrão único) */
+    --t-h1: min(7cqi, 32px); /* Título do hero */
+    --t-h2: min(6.4cqi, 32px); /* Título de seção */
+    --t-h3: min(4.25cqi, 17px);                      /* Título de card */
+    --t-lead: min(4cqi, 16px);                    /* Descrição abaixo do título */
+    --t-body: min(3.75cqi, 15px);                    /* Texto de card / lista */
+    --t-small: min(3.25cqi, 13px);
+
+    /* Formas e Espaçamentos */
+    --r-lg: 44px; /* Card externo (desktop: 65px) */
+    --r-md: 28px; /* Card interno (concêntrico: externo - padding de ~16px) */
+    --pad: min(5cqi, 20px);
+    --sec-y: min(14cqi, 56px);
+    --btn-h: 48px;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  /* clip (nao hidden): hidden transforma o body em container de rolagem no iOS e gera rolagem dupla */
+  html,
+  body {
+    overflow-x: clip;
+  }
+
+  .ut-scope, 
+  main {
+    overflow-x: clip;
+  }
+
+  .container {
+    width: calc(100% - 2 * var(--pad)) !important;
+    max-width: 44rem;
+    margin-inline: auto;
+  }
+
+  /* ---------------------------------------------------------------------
+     2. PADRÕES DE TIPOGRAFIA E ELEMENTOS GLOBAIS
+     --------------------------------------------------------------------- */
+
+  .pt-title, 
+  h2.pt-title,
+  .tilhr, 
+  .titulsobvr {
+    font-size: var(--t-h2) !important;
+    line-height: 1.15 !important;
+  }
+
+  .sbttl, 
+  .descsobr, 
+  .about-copy p, 
+  .ut-contato-text, 
+  .ut-contato-text p, 
+  .ut-cta-text, 
+  .ut-cta-card p {
+    font-size: var(--t-lead) !important;
+    line-height: 1.45 !important;
+    margin: 0;
+  }
+
+  .pt-eyebrow, .eyebrow {
+    font-size: min(3.5cqi, 14px) !important;
+    gap: min(2cqi, 8px);
+  }
+
+  .hero-wrap .eyebrow {
+    padding: 0.3rem 0.9rem;
+  }
+
+  .typed-cursor {
+    width: 0.1rem;
+    margin-left: min(0.4cqi, 1.6px);
+  }
+
+  .typed-word {
+    height: 1.7rem;
+  }
+
+  .rotator {
+    padding: 0 0.4rem;
+  }
+
+  .pt-eyebrow-arrow {
+    font-size: .7em;
+  }
+
+  .btn-primary .fa-arrow-left {
+    margin: min(0.5cqi, 2px) 0px min(0.5cqi, 2px) min(0.5cqi, 2px);
+  }
+
+  .demo-ma-panel-header h2, 
+  .ut-modelo-card h4, 
+  .ut-mini-card h4, 
+  .pt-card-title, 
+  .ut-timeline-pill h5, 
+  .about-commit strong {
+    font-size: var(--t-h3) !important;
+    line-height: 1.2;
+  }
+
+  .ut-modelo-card li, 
+  .ut-mini-card p, 
+  .pt-card-text, 
+  .ut-timeline-pill p, 
+  .about-commit span, 
+  .about-commit p,
+  .ut-review-card blockquote p, 
+  .ut-contact-item, 
+  .ut-logos-text, 
+  .ut-logos-text *, 
+  .ut-faq-question, 
+  .ut-faq-answer {
+    font-size: var(--t-body) !important;
+  }
+
+  .btn, 
+  .ut-btn, 
+  .about-actions .bntcnheader, 
+  .nav-mobile-cta {
+    min-height: var(--btn-h);
+    padding: 0 min(5.5cqi, 22px) !important;
+    font-size: var(--t-body) !important;
+    font-weight: 500;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: min(2.5cqi, 10px);
+  }
+
+  .ut-section, 
+  .ut-scope section {
+    scroll-margin-top: min(21cqi, 84px);
+  }
+
+  .ut-section {
+    padding-block: var(--sec-y) !important;
+  }
+
+  .ut-section-head, 
+  .pt-head {
+    margin-bottom: min(6cqi, 24px) !important;
+    text-align: left !important;
+  }
+
+  .pt-head .pt-eyebrow, 
+  .ut-faq-head .pt-eyebrow {
+    justify-content: flex-start !important;
+  }
+
+  /* ---------------------------------------------------------------------
+     3. CABEÇALHO (NAVBAR)
+     --------------------------------------------------------------------- */
+
+  .nav {
+    margin-top: 0;
+    padding: 0;
+  }
+
+  .nav-inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    /* Linha 1 com altura fixa e conteúdo colado no topo: antes, o min-height era dividido
+       entre as duas linhas da grade, e logo/botão subiam/desciam ~3px ao abrir/fechar o menu. */
+    grid-template-rows: 56px auto;
+    align-content: start;
+    min-height: 56px;
+    padding: 0 min(1.5cqi, 6px) 0 min(4.5cqi, 18px);
+    gap: 0;
+    border-radius: 0px;
+    width: 100% !important;
+    max-width: none;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: transparent;
+    transition: background-color .38s cubic-bezier(.65,0,.35,1);
+  }
+
+  .nav-inner > .brand, 
+  .nav-inner > a.brand {
+    grid-column: 1;
+    grid-row: 1;
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  .nav-links, 
+  .btnidm {
+    display: none !important;
+  }
+
+  .logounder, 
+  .brand svg {
+    width: 120px;
+    height: auto;
+    display: block;
+  }
+
+  .nav-toggle {
+    grid-column: 2;
+    grid-row: 1;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+    color: #fff;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .nav.nav-scrolled .nav-toggle, 
+  .nav.nav-open .nav-toggle {
+    color: #2e2420;
+  }
+
+  .nav-toggle-bars {
+    position: relative;
+    display: block;
+    width: 22px;
+    height: 16px;
+  }
+
+  .nav-toggle-bars span {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    border-radius: 2px;
+    background: currentColor;
+    transition: transform .35s cubic-bezier(.65,0,.35,1), opacity .2s ease, top .35s cubic-bezier(.65,0,.35,1);
+  }
+
+  .nav-toggle-bars span:nth-child(1) { top: 0; }
+  .nav-toggle-bars span:nth-child(2) { top: 7px; }
+  .nav-toggle-bars span:nth-child(3) { top: 14px; }
+
+  .nav.nav-open .nav-toggle-bars span:nth-child(1) { top: 7px; transform: rotate(45deg); }
+  .nav.nav-open .nav-toggle-bars span:nth-child(2) { opacity: 0; transform: scaleX(.2); }
+  .nav.nav-open .nav-toggle-bars span:nth-child(3) { top: 7px; transform: rotate(-45deg); }
+
+  /* Menu aberto: antes animava grid-template-rows (layout a cada frame) + sombra/radius do .nav-inner (repaint).
+     Agora o painel e absoluto, com fundo/sombra/radius fixos, e so anima clip-path + opacity + transform
+     (compositor). O header em si nao muda de tamanho, entao nada e recalculado durante a animacao. */
+  .nav-inner { position: relative; }
+
+  /* O painel comeca no topo do header (cobre a linha do logo/botao) e tem padding-top = altura dela:
+     o fundo branco e UM bloco so, revelado de cima para baixo por clip-path. Logo e botao ficam acima (z-index). */
+  .nav-mobile {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+    padding-top: 56px;
+    background: #fff;
+    border-radius: 0 0 30px 30px;
+    box-shadow: 0 18px 40px rgba(0,0,0,.22);
+    visibility: hidden;
+    clip-path: inset(0 0 calc(100% - 56px) 0 round 0 0 30px 30px);
+    will-change: clip-path;
+    transition:
+      clip-path .38s cubic-bezier(.65,0,.35,1),
+      visibility 0s linear .38s;
+  }
+
+  .nav.nav-open .nav-mobile {
+    visibility: visible;
+    clip-path: inset(0 0 0 0 round 0 0 30px 30px);
+    transition:
+      clip-path .38s cubic-bezier(.65,0,.35,1),
+      visibility 0s;
+  }
+
+  .nav-inner > .brand,
+  .nav-inner > .nav-toggle { position: relative; z-index: 2; }
+
+  .nav-mobile-inner {
+    padding-inline: min(4.5cqi, 18px);
+    padding-bottom: min(4.5cqi, 18px);
+  }
+
+  .logounder { transition: fill .38s cubic-bezier(.65,0,.35,1); }
+  .nav.nav-open .logounder {
+    fill: #2e2420;
+  }
+
+  .nav-mobile-links {
+    display: flex;
+    flex-direction: column;
+    padding-top: min(1cqi, 4px);
+  }
+
+  .nav-mobile-links a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 48px;
+    padding: 0 min(0.5cqi, 2px);
+    font-size: var(--t-lead);
+    font-weight: 400;
+    color: #2e2420;
+    text-decoration: none;
+    border-top: 1px solid rgba(46,36,32,.1);
+  }
+
+  .nav-mobile-links a:first-child {
+    border-top: 0;
+  }
+
+  .nav-mobile-links a.active {
+    color: #ff5220;
+  }
+
+  .nav-mobile-links a.active::after {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ff5220;
+  }
+
+  .nav-mobile-actions {
+    display: flex;
+    flex-direction: column;
+    gap: min(2.5cqi, 10px);
+    padding: min(3cqi, 12px) 0 0;
+  }
+
+  .nav-mobile-cta {
+    background: #ff5220;
+    color: #fff !important;
+    text-decoration: none;
+  }
+
+  .nav-mobile-cta .stcntt {
+    display: inline-flex;
+    margin: 0;
+  }
+
+  .nav-mobile-langs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: min(2cqi, 8px);
+  }
+
+  .nav-mobile-lang {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: min(2cqi, 8px);
+    min-height: 44px;
+    border-radius: 999px;
+    border: 1.5px solid rgba(46,36,32,.14);
+    background: transparent;
+    color: #2e2420;
+    font: inherit;
+    font-size: var(--t-body);
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  .nav-mobile-lang.is-selected {
+    background: #2e2420;
+    border-color: #2e2420;
+    color: #fff;
+  }
+
+  .nav-mobile-lang .lang-flag {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: inline-flex;
+  }
+
+  .nav-mobile-lang .lang-flag img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* ---------------------------------------------------------------------
+     4. HERO
+     --------------------------------------------------------------------- */
+
+  /* Rolagem nativa sempre instantanea: scroll-behavior:smooth fazia o ScrollTrigger.refresh()
+     e o restore de posicao "rolarem sozinhos" (rolamento forcado). */
+  html {
+    scroll-behavior: auto !important;
+    overscroll-behavior-y: none;
+  }
+
+  /* Altura FIXA em CSS (sem JS): rolagem extra = --hero-extra (6svh): so reserva o espaco antes do #problema entrar.
+     Antes o JS mudava essa altura depois do carregamento e o #problema "andava" sozinho. */
+  /* HERO FIXA NO MOBILE: o .hero-wrap e so um espacador transparente (100svh + rolagem extra).
+     A hero nao usa mais position:sticky + margem negativa do #problema (era isso que fazia a
+     pagina "andar" sozinha). Ela fica parada atras e o #problema (opaco, z-index maior) sobe por cima.
+     O JS (useParallaxReveal) esconde a hero (visibility) quando o #problema ja a cobriu por completo. */
+  .hero-wrap {
+    --hero-extra: 30svh;
+    position: relative;
+    height: calc(100svh + var(--hero-extra));
+    pointer-events: none;
+  }
+
+  .hero-actions,
+  .hero-actions .btn {
+    pointer-events: auto;
+  }
+
+  /* Sem "scroll anchoring": quando a demo do #problema muda de altura (linhas, toast, resumo),
+     o navegador corrigia o scrollY sozinho e empurrava a pagina para tras; como a animacao do
+     hero-intro e presa ao scroll, ele "voltava um pouco". Aqui o scroll nunca e ajustado pelo navegador. */
+  html,
+  body,
+  .hero-wrap,
+  #problema,
+  #problema * {
+    overflow-anchor: none;
+  }
+
+  .hero {
+    /* ABSOLUTE (rola nativamente com a pagina): o texto/hero-grid sobe junto com o dedo, sem depender
+       de JS no scroll (antes era fixed + translateY por JS, que atrasava no fling e "descia"). O fundo
+       continua parado: .hero-bg-intro abaixo e position:fixed. */
+    position: absolute !important;
+    background: transparent !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+    height: 100lvh;
+    min-height: 100lvh;
+    max-height: none;
+    padding: calc(min(21cqi, 84px) + env(safe-area-inset-top, 0px)) 0 calc(min(7cqi, 28px) + (100lvh - 100svh)) !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #problema {
+    margin-top: 0;
+    padding-top: 0;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .hero-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    max-width: 34rem;
+    margin-inline: auto;
+  }
+
+  .hero-title {
+    font-size: var(--t-h1) !important;
+    line-height: 1.1 !important;
+    letter-spacing: -0.03em;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  .hero-title-line {
+    display: block;
+  }
+
+  .pt-highlight {
+    padding: min(0.4cqi, 1.6px) min(3.2cqi, 12.8px) min(0.8cqi, 3.2px);
+  }
+
+  .hero .pt-highlight {
+    white-space: nowrap;
+    padding: min(0.4cqi, 1.6px) min(3.2cqi, 12.8px) min(0.8cqi, 3.2px);
+  }
+
+  .hero-intro p, 
+  .hero p {
+    font-size: var(--t-lead) !important;
+    line-height: 1.45 !important;
+    max-width: 30em;
+    margin: 0 auto !important;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: min(2.5cqi, 10px);
+    width: max-content;
+    max-width: 30rem;
+    margin: min(5cqi, 20px) auto 0 !important;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+  }
+
+  .hero-actions .btn-primary {
+    padding: 0 min(2.5cqi, 10px) 0px min(5.5cqi, 22px) !important;
+  }
+
+  .scrolldown {
+    position: relative;
+    right: auto;
+    left: auto;
+    bottom: auto;
+    top: auto;
+    margin: min(5.5cqi, 22px) auto 0;
+    transform: none;
+    flex: 0 0 auto;
+  }
+
+  .scrolldown::before {
+    width: 0.35rem;
+  }
+
+  /* ---------------------------------------------------------------------
+     5. PROBLEMA / DEMO (Painéis em pilha)
+     --------------------------------------------------------------------- */
+
+  .demo-ma-wrapper {
+    margin-bottom: 0 !important;
+  }
+
+  .demo-ma-header {
+    position: static !important;
+    transform: none !important;
+    padding: var(--sec-y) 0 min(6cqi, 24px) !important;
+    text-align: left;
+  }
+
+  .demo-ma-header .pt-title {
+    margin-bottom: 0 !important;
+  }
+
+  .demo-ma-header .sbttl {
+    margin-top: min(3cqi, 12px);
+  }
+
+  .demo-ma-container {
+    display: block;
+    margin-bottom: 0 !important;
+  }
+
+  .demo-ma-panels-stack, 
+  .scroll-stack, 
+  .scroll-stack__inner {
+    display: block;
+    width: 100%;
+    padding-inline: 0 !important;
+  }
+
+  /* Pilha sticky igual ao desktop: o painel Automatizado sobe e cobre o Manual.
+     Ajuste aqui: topo da pilha (abaixo do header fixo), deslocamento entre painéis e respiro entre eles. */
+  .demo-ma-panels-stack {
+    --m-stack-top: 84px;
+    --m-stack-offset: 110px;
+    --m-stack-gap: min(10cqi, 40px);
+    --m-stack-hold: 25vh;
+  }
+
+  .scroll-stack__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--m-stack-gap);
+    padding-bottom: 0 !important;
+  }
+
+  /* espaçadores e marcadores do desktop não são usados no mobile */
+  .scroll-stack__inner > [aria-hidden="true"]:not(.scroll-stack__end) {
+    display: none !important;
+  }
+
+  /* Espaço no fim da pilha: é ele que deixa o painel Automatizado "grudar" no topo
+     (sem isso ele só rola por cima e cobre o Manual por completo).
+     Aumente --m-stack-hold para o Automatizado ficar parado por mais tempo. */
+  /* SEM pausa no fim: o espaco que segurava o Automatizado parado foi removido, entao quando ele chega
+     no limite a proxima rolagem ja continua para a proxima secao (antes precisava rolar ~25vh a mais).
+     Para voltar a pausa: troque por `display: block !important; height: var(--m-stack-hold) !important;`. */
+  .scroll-stack__end {
+    display: none !important;
+  }
+
+  .scroll-stack__slot {
+    position: sticky !important;
+    top: calc(var(--m-stack-top) + var(--i, 0) * var(--m-stack-offset)) !important;
+    margin: 0 !important;
+    z-index: calc(var(--i, 0) + 1) !important;
+  }
+
+  /* Solta junto: --m-release-pad / --m-release-pad-last vem do ProcessDemo.jsx (iguala a base dos dois
+     paineis sticky). A margem negativa no proximo painel devolve o espaco, entao o layout nao muda. */
+  .scroll-stack__slot--buries {
+    margin-bottom: var(--m-release-pad, 0px) !important;
+  }
+  .scroll-stack__slot--buries ~ .scroll-stack__slot {
+    margin-top: calc(-1 * var(--m-release-pad, 0px)) !important;
+    margin-bottom: var(--m-release-pad-last, 0px) !important;
+  }
+  .scroll-stack__end {
+    margin-top: calc(-1 * var(--m-release-pad-last, 0px)) !important;
+  }
+
+  .scroll-stack-card {
+    animation: none !important;
+    scale: none !important;
+    transform: none !important;
+  }
+
+  .demo-ma-panels-stack .scroll-stack-card.demo-ma-stack-item,
+  .demo-ma-panels-stack .scroll-stack-card__shade {
+    border-radius: var(--r-lg);
+  }
+
+  .demo-ma-system-panel {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: min(2.5cqi, 10px) !important;
+    padding: min(4.25cqi, 17px) !important;
+    border-radius: var(--r-lg) !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  .demo-ma-system-panel .sgndbck, 
+  .demo-ma-system-panel .tdscdss {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .sgndbck {
+    padding: min(4.5cqi, 18px) !important;
+    border-radius: var(--r-md) !important;
+  }
+
+  .demo-ma-panel-header {
+    flex-wrap: wrap;
+    gap: min(2.5cqi, 10px);
+    align-items: center;
+    margin-bottom: min(2.5cqi, 10px);
+  }
+
+  .demo-ma-panel-header h2 {
+    margin: 0px !important;
+  }
+
+  .demo-ma-timer-box {
+    padding: min(1.5cqi, 6px) min(3cqi, 12px);
+    gap: min(1.5cqi, 6px);
+  }
+
+  .demo-ma-timer-label {
+    font-size: min(2.75cqi, 11px);
+  }
+
+  /* largura fixa no cronômetro: "0.00s" -> "26.00s" não quebra mais o cabeçalho em outra linha */
+  .demo-ma-timer {
+    font-size: var(--t-small);
+    display: inline-block;
+    min-width: 5ch;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .demo-ma-table-wrapper {
+    overflow-x: auto;
+  }
+
+  .sgndbck table {
+    width: 100%;
+  }
+
+  .fab-cta .bntcnheader {
+    font-size: min(4cqi, 20px);
+    padding: 0.3em 0.3em 0.3em 1em;
+  }
+
+  .sgndbck th, 
+  .sgndbck td {
+    padding: min(1.75cqi, 7px) min(2.5cqi, 10px) !important;
+    font-size: var(--t-small) !important;
+    line-height: 1.25;
+  }
+
+  /* Altura fixa das linhas: célula vazia, digitando (cursor "|") ou preenchida
+     (1 ou 2 linhas de texto) tem sempre a mesma altura, então o card não muda de tamanho. */
+  .sgndbck td {
+    height: 48px;
+    vertical-align: middle;
+  }
+
+  .demo-ma-summary-row, 
+  .demo-ma-summary-row * {
+    font-size: var(--t-small) !important;
+    line-height: 1.35;
+  }
+
+  .demo-ma-summary-success, .demo-ma-summary-alert {
+    font-size: var(--t-small) !important;
+    line-height: 1.1;
+    border-radius: 10px;
+  }
+
+  .demo-ma-summary-inner {
+    width: 93%;
+  }
+
+  .demo-ma-toast {
+    font-size: var(--t-small) !important;
+    padding: min(2cqi, 8px) min(3cqi, 12px) !important;
+    width: 92%;
+    border-radius: 10px;
+  }
+
+  .ut-scope .ut-form-group textarea {
+    height: 150px;
+  }
+
+  .demo-ma-toast-error {
+    width: 83% !important;
+    top: 5.5rem;
+  }
+
+  .tdscdss {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: min(2cqi, 8px) !important;
+  }
+
+  .cdssgmn {
+    font-size: var(--t-body) !important;
+    padding: min(3.25cqi, 13px) !important;
+    gap: min(3cqi, 12px) !important;
+    min-height: 44px;
+    line-height: 1.25;
+  }
+
+  .cdssgmn .fa-solid, 
+  .errmn .fa-solid, 
+  .crtmn .fa-solid {
+    font-size: min(5.5cqi, 22px) !important;
+    flex: 0 0 auto;
+  }
+
+  /* ---------------------------------------------------------------------
+     6. LINHA DO TEMPO DO PROBLEMA (Scroll horizontal)
+     --------------------------------------------------------------------- */
+
+  #problem-timeline {
+    padding: var(--sec-y) 0 min(10cqi, 40px);
+    --pt-icon: 56px;
+  }
+
+  #problem-timeline.pt-hpin {
+    height: 100svh;
+    padding: min(21cqi, 84px) 0 min(8cqi, 32px);
+    gap: min(7cqi, 28px);
+  }
+
+  #problem-timeline .pt-head {
+    text-align: left;
+    max-width: 35rem;
+    margin: 0;
+  }
+
+  #problem-timeline.pt-hpin .pt-head {
+    margin-bottom: 0;
+  }
+
+  /* o navegador cuida so do arrasto vertical; o horizontal e tratado pelo useHorizontalPin */
+  #problem-timeline.pt-hpin .pt-scroll {
+    touch-action: pan-y;
+  }
+
+  .pt-scroll {
+    scrollbar-width: none;
+    padding-top: min(16cqi, 64px);
+    margin-top: max(-16cqi, -64px);
+  }
+
+  .pt-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .pt-track {
+    padding-inline: var(--pad) !important;
+  }
+
+  .pt-cards {
+    gap: min(18cqi, 72px);
+  }
+
+  .pt-card {
+    width: min(250px, 68vw);
+    max-width: none;
+  }
+
+  .pt-card-title {
+    width: auto;
+    margin-bottom: min(1.5cqi, 6px);
+  }
+
+  .pt-icon-row {
+    margin-bottom: min(4cqi, 16px);
+  }
+
+  .pt-icon {
+    width: 52px;
+    height: 52px;
+    font-size: min(4.75cqi, 19px);
+  }
+
+  .pt-connector {
+    top: calc(var(--pt-icon) / 2 - 1.5px);
+    height: 3px;
+    left: 8px;
+    background: repeating-linear-gradient(to right, #ff5220 0 10px, transparent 10px 16px);
+  }
+
+  .pt-dot {
+    --pt-dot-size: 12px;
+    top: calc(var(--pt-icon) / 2);
+    left: calc(8px + var(--pt-fill, 0px));
+  }
+
+  /* ---------------------------------------------------------------------
+     7. SOLUÇÃO / MODELO
+     --------------------------------------------------------------------- */
+
+  .ut-scope.ut-modelo-section {
+    padding: var(--sec-y) 0 !important;
+  }
+
+  .ut-modelo-grid {
+    display: flex !important;
+    flex-direction: column;
+    gap: min(6cqi, 24px) !important;
+  }
+
+  .ut-modelo-text {
+    order: -1;
+    position: static !important;
+    width: 100% !important;
+    transform: none !important;
+  }
+
+  .ut-modelo-cards {
+    display: flex !important;
+    flex-direction: column;
+    gap: min(4cqi, 16px) !important;
+    width: 100% !important;
+  }
+
+  .ut-scope .ut-modelo-card {
+    border-radius: var(--r-lg) !important;
+    padding: min(4.25cqi, 17px) min(4.25cqi, 17px) 0 !important;
+    overflow: hidden;
+  }
+
+  .ut-scope .ut-modelo-card li {
+    align-items: center;
+  }
+
+  .ut-modelo-card .sgncard {
+    border-radius: var(--r-md) var(--r-md) 0 0 !important;
+    padding: min(5cqi, 20px) min(4.5cqi, 18px) !important;
+  }
+
+  .ut-modelo-card h4 {
+    margin-bottom: min(3.5cqi, 14px) !important;
+  }
+
+  .ut-modelo-card ul {
+    display: flex;
+    flex-direction: column;
+    gap: min(3.5cqi, 14px) !important;
+  }
+
+  .ut-modelo-card li {
+    gap: min(2.5cqi, 10px) !important;
+    align-items: flex-start;
+  }
+
+  .ut-li-ic {
+    flex: 0 0 auto;
+  }
+
+  /* ---------------------------------------------------------------------
+     8. SERVIÇOS / CRITÉRIOS
+     --------------------------------------------------------------------- */
+
+  .ut-criterio-grid {
+    display: flex !important;
+    flex-direction: column;
+    gap: min(6cqi, 24px) !important;
+  }
+
+  .ut-criterio-text {
+    width: 100% !important;
+    position: static !important;
+  }
+
+  .ut-criterio-cards {
+    display: flex !important;
+    flex-direction: column;
+    gap: min(2.5cqi, 10px) !important;
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  .ut-criterio-cards > .ut-mini-card {
+    width: 100% !important;
+    max-width: none !important;
+    align-items: center;
+  }
+
+  .ut-mini-card, 
+  .ut-mini-card--wide {
+    display: grid !important;
+    grid-template-columns: auto 1fr;
+    column-gap: min(3.5cqi, 14px);
+    align-items: start;
+    padding: min(4cqi, 16px) !important;
+    border-radius: var(--r-md) !important;
+    grid-column: auto !important;
+  }
+
+  .ut-mini-icon {
+    grid-row: 1 / span 2;
+    width: 44px !important;
+    height: 44px !important;
+    margin: 0 !important;
+  }
+
+  .ut-mini-card h4 {
+    margin: min(0.5cqi, 2px) 0 min(1.5cqi, 6px) !important;
+  }
+
+  /* ---------------------------------------------------------------------
+     9. INTEGRAÇÕES / LOGOS
+     --------------------------------------------------------------------- */
+
+  .ut-escopo-head {
+    text-align: left !important;
+    margin: 0 0 min(6cqi, 24px) !important;
+  }
+
+  .ut-escopo-head .pt-eyebrow {
+    justify-content: flex-start !important;
+  }
+
+  .ut-logos {
+    grid-template-columns: 1fr 1fr !important;
+    overflow: hidden;
+  }
+
+  .ut-logos-card {
+    min-height: 84px !important;
+    padding: min(3.5cqi, 14px) min(2.5cqi, 10px) !important;
+  }
+
+  /* Xadrez em 2 colunas: linha 1 escuro/claro, linha 2 claro/escuro, e assim por diante
+     (o tom escuro é --ut-logos-tint, definido em .ut-logos) */
+  .ut-scope .ut-logos .ut-logos-card:nth-child(4n + 1),
+  .ut-scope .ut-logos .ut-logos-card:nth-child(4n) {
+    background: var(--ut-logos-tint);
+  }
+
+  .ut-scope .ut-logos .ut-logos-card:nth-child(4n + 2),
+  .ut-scope .ut-logos .ut-logos-card:nth-child(4n + 3) {
+    background: transparent;
+  }
+
+  /* Tamanho de cada logo no mobile: edite o campo `m` (em rem) de cada item
+     em INTEGRATIONS (IntegrationsSection.jsx). Sem `m`, usa o tamanho do desktop. */
+  .ut-scope .ut-logos-logo {
+    width: calc(var(--wm, var(--w, 8rem)) - 1rem); /* -1rem em todas as logos no mobile */
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* ---------------------------------------------------------------------
+     10. PROCESSO
+     --------------------------------------------------------------------- */
+
+  #processo .ut-timeline {
+    max-width: 100%;
+  }
+
+  /* Cards alternados nos cantos (1 esquerda, 2 direita, ...), mais estreitos e todos com a mesma altura:
+     a grade dá a mesma altura a todas as linhas e o card preenche a linha. */
+  #processo .ut-timeline {
+    display: grid;
+    grid-auto-rows: 1fr;
+    row-gap: min(35cqi, 190px);
+  }
+
+  #processo .ut-timeline-row {
+    margin-bottom: 0 !important;
+    align-items: stretch;
+  }
+
+  #processo .ut-timeline-row.ut-left {
+    justify-content: flex-start;
+  }
+
+  #processo .ut-timeline-row.ut-right {
+    justify-content: flex-end;
+  }
+
+  #processo .ut-timeline-pill {
+    box-sizing: border-box;
+    width: 78%;
+    max-width: 300px;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: min(3cqi, 20px) min(5cqi, 20px) !important;
+    gap: min(3cqi, 12px) !important;
+  }
+
+  .ut-timeline-num {
+    width: 44px !important;
+    height: 44px !important;
+    font-size: var(--t-h3) !important;
+  }
+
+  .ut-timeline-pill h5 {
+    margin-bottom: min(0.75cqi, 3px) !important;
+  }
+
+  /* ---------------------------------------------------------------------
+     11. AVALIAÇÕES (REVIEWS)
+     --------------------------------------------------------------------- */
+
+  .ut-review-slider {
+    display: block !important;
+    padding: 0 !important;
+  }
+
+  .ut-scope .ut-review-arrow--side {
+    display: none !important;
+  }
+
+  .ut-review-viewport {
+    width: 100%;
+    touch-action: pan-y;
+  }
+
+  .ut-review-card, 
+  .ut-mini-card.ut-review-card {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between;
+    padding: min(5cqi, 20px) !important;
+    border-radius: var(--r-lg) !important;
+    gap: min(4cqi, 16px) !important;
+    min-height: 0;
+  }
+
+  .ut-review-meta strong {
+    font-size: var(--t-body) !important;
+  }
+
+  .ut-review-meta span {
+    font-size: var(--t-small) !important;
+  }
+
+  .ut-review-author .ut-mini-icon {
+    width: 44px !important;
+    height: 44px !important;
+    grid-row: auto;
+  }
+
+  .ut-scope .ut-review-controls {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    gap: min(2cqi, 8px);
+    margin-top: min(4cqi, 16px);
+  }
+
+  .ut-scope .ut-review-arrow--ctrl {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    position: static !important;
+    transform: none !important;
+    width: 46px !important;
+    height: 46px !important;
+    border-radius: 50%;
+  }
+
+  .ut-scope .ut-review-dots {
+    margin: 0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    flex: 1 1 auto;
+    flex-wrap: wrap;
+  }
+
+  .ut-scope .ut-review-dot {
+    position: relative;
+    width: 26px !important;
+    height: 44px !important;
+    padding: 0;
+    border: 0;
+    background: transparent !important;
+  }
+
+  .ut-scope .ut-review-dot::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: #cfcdc4;
+    transform: translate(-50%, -50%);
+    transition: width .3s ease, background-color .3s ease;
+  }
+
+  .ut-scope .ut-review-dot.is-active {
+    width: 40px !important;
+  }
+
+  .ut-scope .ut-review-dot.is-active::before {
+    width: 24px;
+    background: #ff5220;
+  }
+
+  /* ---------------------------------------------------------------------
+     12. SOBRE
+     --------------------------------------------------------------------- */
+
+  .about-card {
+    display: flex !important;
+    flex-direction: column;
+    padding: min(4.25cqi, 17px) min(5cqi, 20px) !important;
+    border-radius: var(--r-lg) !important;
+    gap: min(5.5cqi, 22px);
+  }
+
+  .about-top {
+    display: flex !important;
+    flex-direction: column;
+    gap: min(5cqi, 20px) !important;
+  }
+
+  .about-copy {
+    width: 100% !important;
+  }
+
+  .about-actions {
+    margin-top: min(4cqi, 16px);
+    display: flex;
+  }
+
+  .about-actions .bntcnheader {
+    width: 100%;
+  }
+
+  .about-visual {
+    width: 100% !important;
+    border-radius: var(--r-md) !important;
+    aspect-ratio: 4 / 4;
+    overflow: hidden;
+  }
+
+  .about-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .about-commitments {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+  }
+
+  .about-commit {
+    padding: min(3.5cqi, 14px) 0 !important;
+    border-top: 1px solid rgba(46,36,32,.12);
+    border-left: 0 !important;
+    border-right: 0 !important;
+  }
+
+  .about-commit:first-child {
+    border-top: 0;
+  }
+
+  .about-commit strong {
+    display: block;
+    margin-bottom: min(1cqi, 4px);
+  }
+
+  /* ---------------------------------------------------------------------
+     13. CONTATO
+     --------------------------------------------------------------------- */
+
+  .ut-contato-wrap {
+    display: flex !important;
+    flex-direction: column;
+    padding: min(4.25cqi, 17px) !important;
+    gap: min(3cqi, 12px) !important;
+    border-radius: var(--r-lg) !important;
+  }
+
+  .ut-contato-info, 
+  .ut-contato-form {
+    border-radius: var(--r-md) !important;
+    padding: min(5cqi, 20px) !important;
+  }
+
+  .ut-contato-info {
+    gap: min(4cqi, 16px);
+  }
+
+  .ut-contact-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: min(2.5cqi, 10px);
+  }
+
+  .ut-contact-item {
+    min-height: 44px;
+    padding: 0 min(4cqi, 16px) !important;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    gap: min(2.5cqi, 10px);
+  }
+
+  .ut-form-group {
+    margin-bottom: min(3.5cqi, 14px);
+  }
+
+  .ut-form-group label {
+    font-size: var(--t-body) !important;
+    margin-bottom: min(1.5cqi, 6px);
+    display: block;
+  }
+
+  .ut-form-group input, 
+  .ut-form-group textarea, 
+  .ut-form-group select {
+    font-size: var(--t-body) !important;
+    padding: min(3cqi, 12px) min(4.5cqi, 18px) !important;
+    width: 100%;
+  }
+
+  .ut-form-group textarea {
+    min-height: 120px;
+  }
+
+  .ut-form-check {
+    gap: min(3cqi, 12px);
+    align-items: flex-start;
+    font-size: var(--t-body) !important;
+    line-height: 1.4;
+  }
+
+  .ut-form-check input {
+    width: 22px;
+    height: 22px;
+    flex: 0 0 auto;
+    margin-top: 0;
+  }
+
+  .ut-contato-form .ut-btn {
+    width: 100%;
+  }
+
+  /* ---------------------------------------------------------------------
+     14. FAQ
+     --------------------------------------------------------------------- */
+
+  .ut-faq-head {
+    text-align: left;
+    margin-bottom: min(6cqi, 24px) !important;
+  }
+
+  .ut-faq-list {
+    gap: min(2.5cqi, 10px) !important;
+  }
+
+  .ut-faq-item {
+    padding: 0 0px 0px 10px;
+    border-radius: 200px !important;
+  }
+
+  .ut-faq-item.is-open {
+    border-radius: 30px !important;
+  }
+
+  .ut-scope .ut-faq-question {
+    padding: min(3.75cqi, 15px);
+    min-height: 60px;
+    gap: min(3cqi, 12px);
+    text-align: left;
+  }
+
+  .ut-scope .ut-faq-item.is-open .ut-faq-question {
+    padding: min(4cqi, 16px) min(3.75cqi, 15px) 0 min(5cqi, 20px);
+  }
+
+  .ut-scope .ut-faq-toggle {
+    width: 44px;
+    height: 44px;
+    flex: 0 0 auto;
+    font-size: min(4cqi, 16px);
+    border-radius: 100px;
+  }
+
+  .ut-scope .ut-faq-item.is-open .ut-faq-toggle {
+    margin-bottom: max(-5.5cqi, -22px);
+  }
+
+  .ut-scope .ut-faq-answer {
+    padding: min(3cqi, 12px) min(17cqi, 68px) min(5cqi, 20px) min(5cqi, 20px);
+  }
+
+  .ut-scope .ut-faq-more {
+    font-size: var(--t-body);
+    display: inline-flex;
+    align-items: center;
+    padding-top: min(5cqi, 20px);
+    margin: 0;
+  }
+
+  /* ---------------------------------------------------------------------
+     15. CTA & RODAPÉ (FOOTER)
+     --------------------------------------------------------------------- */
+
+  .ut-cta-card {
+    padding: min(8cqi, 40px) min(6.25cqi, 25px) min(6.25cqi, 25px) !important;
+    border-radius: var(--r-lg) !important;
+    min-height: 0 !important;
+  }
+
+  .ut-cta-card .pt-title {
+    text-align: center;
+    margin: 0;
+  }
+
+  .ut-cta-text, 
+  .ut-cta-card p {
+    max-width: 30em;
+    margin-inline: auto;
+  }
+
+  .ut-cta-card .ut-btn {
+    width: 100%;
+    max-width: 22rem;
+  }
+
+  .ut-footer .ut-footer-side .ut-footer-lang-wrap .lang-popup {
+    left: 0;
+  }
+
+  .ut-footer {
+    padding: min(8cqi, 32px) 0 calc(min(5cqi, 20px) + env(safe-area-inset-bottom, 0px));
+  }
+
+  .ut-footer .ut-footer-giant { width: 100%; }
+  .ut-footer .ut-footer-giant span {
+    letter-spacing: -0.04em;
+    transform: none;
+    width: max-content;
+  }
+
+  .ut-footer .ut-footer-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: min(3cqi, 12px);
+    padding-bottom: min(5cqi, 20px);
+  }
+
+  .ut-footer .ut-footer-logo {
+    width: 120px;
+    margin: 0;
+  }
+
+  .ut-footer .ut-footer-tagline {
+    text-align: left;
+    font-size: var(--t-lead);
+    line-height: 1.4;
+    max-width: 28em;
+    letter-spacing: 0;
+  }
+
+  .ut-footer .ut-footer-main {
+    flex-direction: column;
+    align-items: stretch;
+    gap: min(5cqi, 20px);
+    padding: min(5cqi, 20px) 0;
+  }
+
+  .ut-footer .ut-footer-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: min(5cqi, 20px) min(4cqi, 16px);
+  }
+
+  .ut-footer .ut-footer-col {
+    gap: 0;
+    min-width: 0;
+  }
+
+  .ut-footer .ut-footer-cols > .ut-footer-col:first-child,
+  .ut-footer .ut-footer-cols > .ut-footer-col:nth-child(n+3) {
+    grid-column: 1 / -1;
+  }
+
+  .ut-footer .ut-footer-cols > .ut-footer-col:first-child .ut-footer-links {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: min(4cqi, 16px);
+  }
+
+  .ut-footer .ut-footer-col h5 {
+    font-size: var(--t-lead);
+    margin-bottom: min(1cqi, 4px);
+  }
+
+  .ut-footer .ut-footer-col a {
+    display: flex;
+    align-items: center;
+    font-size: var(--t-body);
+  }
+
+  .ut-footer .ut-footer-col a.ut-contact-line {
+    gap: min(2.5cqi, 10px);
+    overflow-wrap: anywhere;
+  }
+
+  .ut-footer .ut-footer-side {
+    align-items: flex-start;
+    width: 100%;
+    gap: min(4cqi, 16px);
+  }
+
+  .ut-footer .ut-footer-side .ut-footer-social {
+    gap: min(1cqi, 4px);
+    margin-left: max(-1.5cqi, -6px);
+  }
+
+  .ut-footer .ut-footer-side .ut-footer-social a {
+    width: 44px;
+    height: 44px;
+    font-size: min(6cqi, 24px);
+  }
+
+  .ut-footer .ut-footer-bottom, 
+  .ut-footer .ut-footer-bottom.is-flat {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: min(1cqi, 4px);
+    padding-top: min(4cqi, 16px);
+    font-size: var(--t-small);
+    min-height: 0;
+  }
+
+  .ut-footer .ut-footer-bottom-left {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: min(1cqi, 4px);
+  }
+
+  .ut-footer .ut-footer-bottom-right {
+    gap: min(2.5cqi, 10px);
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-top: min(2.5cqi, 10px);
+  }
+
+  .ut-footer .ut-footer-bottom-right a {
+    display: inline-flex;
+    align-items: center;
+    font-size: var(--t-body);
+  }
+
+  .ut-footer .ut-footer-bottom-right .ut-cc-reopen {
+    font-size: var(--t-body) !important;
+  }
+
+  /* ---------------------------------------------------------------------
+     16. ELEMENTOS FLUTUANTES (FAB)
+     --------------------------------------------------------------------- */
+
+  .fab-cta {
+    right: calc(14px + env(safe-area-inset-right, 0px)) !important;
+    bottom: calc(14px + env(safe-area-inset-bottom, 0px)) !important;
+    font-size: min(3.5cqi, 14px) !important;
+  }
+}
+
+/* ===== Otimizacao de FPS no mobile =====
+   Sem blur/backdrop-filter; efeitos mantidos, mas so com transform/opacity (compositor). */
+@media (max-width: 1024px) {
+  /* FAB: sem blur, so o tom com opacidade */
+  .fab-cta-link {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    background: #b4b4acd9;
+  }
+  .about-badge {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: rgb(255 255 255 / 26%);
+    padding: min(3cqi, 10px);
+  }
+
+  .about-badge strong {
+    font-size: var(--t-lead) !important;
+  }
+
+  .about-badge span {
+    font-size: var(--t-body) !important;
+  }
+
+  /* hero: sem will-change permanente nos wrappers (a animacao de entrada ja e promovida sozinha);
+     so o hero-grid, que o GSAP move na rolagem, fica na propria camada */
+  .hero-intro,
+  .hero-bg-intro { will-change: auto !important; }
+  /* mobile: o fundo e escuro igual ao body, entao o fade/scale de entrada so atrasava as barras
+     (ficavam invisiveis ate 0.6s). Sem a animacao o canvas aparece no 1o frame desenhado. */
+  .hero-bg-intro { animation: none !important; }
+
+  /* fundo da hero parado na tela (o #problema, opaco e com z-index maior, sobe por cima) */
+  .hero-bg-intro {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    right: auto;
+    bottom: auto;
+    width: 100%;
+    height: 100lvh;
+    background: #1a1410;
+  }
+  .hero-grid {
+    will-change: opacity;
+    transform-origin: 50% 50%;
+  }
+  /* Sobe + fade + blur + encolhe, ligados ao scroll, 100% no compositor (sem JS).
+     Opacidade chega a 0 em 70% do trecho; o blur entra entre 30% e 70% (curto, para ficar leve).
+     O translateY e EXTRA ao scroll nativo da .hero: faz o texto subir mais rapido que a pagina
+     (como no desktop). animation-range maior = animacao mais lenta e suave.
+     O fallback em useParallaxReveal.js (so navegador sem scroll-driven animation) nao acompanha
+     esses valores. */
+  @supports (animation-timeline: scroll()) {
+    .hero-grid.is-css-driven {
+      animation: hero-grid-out linear both;
+      animation-timeline: scroll(root block);
+      animation-range: 0px 50lvh;
+    }
+    @keyframes hero-grid-out {
+      0%   { opacity: 1; transform: translateY(0) scale(1); filter: blur(0px); }
+      30%  { filter: blur(0px); }
+      70%  { opacity: 0; filter: blur(5px); }
+      100% { opacity: 0; transform: translateY(-10lvh) scale(0.6); filter: blur(5px); }
+    }
+  }
+
+  .ut-scope .ut-contato-social a {
+    width: auto;
+    height: auto;
+    font-size: 1.4rem;
+  }
+
+  .lg-sheet-head .lg-close {
+    display: none !important;
+  }
+
+  /* #problema (mobile): so transform/opacity (compositor), sem will-change fixo e sem overshoot.
+     O pulso (::before/::after) ja e promovido a camada pela propria animacao. */
+  .pt-icon {
+    transition: background-color 0.35s ease, transform 0.35s ease-out;
+  }
+  /* titulo + texto: apagado/aceso por OPACITY no wrapper (compositor), em vez de transicionar `color`
+     em dois textos por card (repintava os tiles da faixa durante a rolagem) */
+  .pt-card:not(.is-on) .pt-card-title { color: var(--text); }
+  .pt-card:not(.is-on) .pt-card-text { color: #666563; }
+  .pt-card .sjnt {
+    transition: opacity 0.35s ease-out;
+    will-change: opacity;
+  }
+  .pt-card:not(.is-on) .sjnt { opacity: 0.25; }
+  .pt-card-title,
+  .pt-card-text { transition: none; }
+  /* trilho cinza sem `filter` (cria superficie propria na faixa inteira): cor cinza direto */
+  .pt-connector-base {
+    filter: none;
+    background: repeating-linear-gradient(to right, #808080 0 10px, transparent 10px 16px);
+  }
+  /* pre-aquecimento: a section esta perto da tela, cada card ja vira camada propria (raster feito
+     antes da faixa comecar a andar, em vez de rasterizar tiles novos durante o 1o gesto) */
+  #problem-timeline.pt-warm .pt-card,
+  #problem-timeline.pt-warm .pt-connector,
+  #problem-timeline.pt-warm .pt-icon { will-change: transform; }
+  .pt-card.is-pinged .pt-icon::before {
+    animation: pt-wave-m 0.9s ease-out 1 both;
+  }
+  .pt-card.is-pinged .pt-icon::after {
+    animation: pt-wave-m 0.9s ease-out 0.18s 1 both;
+  }
+  /* bolinha: translate em vez de `left` (nao refaz layout) */
+  .pt-dot {
+    left: 8px;
+    transform: translate(calc(var(--pt-fill, 0px) - 50%), -50%);
+    will-change: transform;
+  }
+  /* trilho laranja: clip-path no lugar de mask-image com gradiente */
+  .pt-connector-fill {
+    -webkit-mask-image: none;
+    mask-image: none;
+    clip-path: inset(0 calc(100% - var(--pt-fill, 0px)) 0 0);
+    will-change: clip-path;
+  }
+
+  /* #processo (mobile): sem chacoalhada e sem escala no texto (re-rasterizava a pill a cada frame).
+     Acender = fade de cor curto; o destaque e um unico anel (transform/opacity, compositor). */
+  .ut-scope .ut-timeline-pill,
+  .ut-scope .ut-timeline-pill:not(.is-on) {
+    transform: rotate(var(--ut-rot, 0deg));
+    transition: background-color 0.35s ease;
+  }
+  .ut-scope .ut-timeline-num { transition: color 0.35s ease; }
+  /* balanco leve: propriedade `rotate` (compositor), 4 passos, 0.8s */
+  .ut-scope .ut-timeline-pill.is-pinged {
+    animation: ut-pill-shake-m 0.8s ease-out 1 both;
+  }
+  .ut-timeline-pill.is-pinged::before {
+    animation: ut-pill-pulse-m 0.9s ease-out 1 both;
+  }
+  .ut-timeline-pill.is-pinged::after { animation: none; }
+
+  /* #processo (mobile): serrilhado + lag. Cada pill vira camada propria (rasteriza com antialias, sem
+     re-rasterizar na rolagem) e o svg/bolinha ficam em camadas da GPU, isolados do resto da pagina. */
+  #processo .ut-timeline-pill {
+    will-change: transform;
+    transform: rotate(var(--ut-rot, 0deg)) translateZ(0) !important;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    outline: 1px solid transparent; /* suaviza a borda do retangulo rotacionado */
+    contain: layout style;
+  }
+  #processo .ut-timeline-bg { will-change: transform; contain: layout style; }
+  #processo .ut-dot { will-change: transform; }
+}
+/* icone do #problema: onda por transform/opacity */
+@keyframes pt-wave-m {
+  0%   { opacity: 0.6; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.7); }
+}
+@keyframes ut-pill-shake-m {
+  0%   { rotate: 0deg; }
+  15%  { rotate: -5deg; }
+  35%  { rotate: 4deg; }
+  55%  { rotate: -3deg; }
+  75%  { rotate: 1.5deg; }
+  100% { rotate: 0deg; }
+}
+@keyframes ut-pill-pulse-m {
+  0%   { opacity: 0.6; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.06, 1.18); }
+}

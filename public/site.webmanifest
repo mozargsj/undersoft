@@ -1,0 +1,16 @@
+{
+  "name": "Undersoft | Automação Empresarial",
+  "short_name": "Undersoft",
+  "description": "Automação de processos empresariais e sistemas à medida.",
+  "lang": "pt-PT",
+  "start_url": "/",
+  "scope": "/",
+  "display": "browser",
+  "background_color": "#1a1410",
+  "theme_color": "#1a1410",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

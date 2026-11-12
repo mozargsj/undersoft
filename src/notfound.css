@@ -1,0 +1,40 @@
+/* PAGINA 404: mesmo tema das paginas legais/obrigado (fundo claro #F7F6F0, laranja #ff5220, Geist). */
+
+.nf-page { padding: 6rem 0; min-height: 100vh; min-height: 100dvh; display: flex; align-items: center; }
+.nf-page > .container { width: 100%; }
+.nf-card { max-width: 36rem; margin: 0 auto; text-align: center; }
+
+.nf-anim { width: 25rem; height: 25rem; margin: 0 auto; }
+.nf-anim iframe { display: block; width: 100%; height: 100%; border: 0; background: transparent; }
+
+.nf-code {
+  margin: 0; font-size: clamp(6rem, 12vw, 9rem); font-weight: 600;
+  line-height: 1; letter-spacing: -.05em; color: #2e2420;
+}
+.nf-page .nf-title {
+  margin: 0 0 .75rem; font-size: clamp(1.6rem, 2.6vw, 2rem);
+  line-height: 1.1; font-weight: 500; letter-spacing: -.03em; color: #2e2420;
+}
+.nf-lead { margin: 0 auto 2rem; max-width: 30rem; font-size: 1.15rem; line-height: 1.45; color: #666563; }
+.nf-page .nf-btn { margin: 0 auto; text-decoration: none; align-items: center; }
+
+@media (max-width: 1024px) {
+  .nf-anim { width: 20rem; height: 20rem; }
+  .nf-page {
+    padding: calc(var(--m-hdr-h) + env(safe-area-inset-top, 0px) + 32px) 0 var(--sec-y);
+  }
+  /* mobile: "404" menor, para nao dominar a tela */
+  .nf-code { font-size: 5.5rem; }
+  .nf-lead { font-size: 1.05rem; }
+  .nf-btn { width: 100%; justify-content: center; }
+}
+
+/* ate 400px: mesmas proporcoes de 400px, em cqi (como nas outras paginas) */
+@media (max-width: 400px) {
+  .nf-anim { width: 70cqi; height: 70cqi;}
+  .nf-page { padding: calc(var(--m-hdr-h) + env(safe-area-inset-top, 0px) + 8cqi) 0 14cqi; }
+  .nf-page > .container { width: 90cqi !important; }
+  .nf-code { font-size: 22cqi; }
+  .nf-lead { margin-bottom: 8cqi; font-size: 4.2cqi; }
+  .nf-btn { min-height: 12cqi; padding: 0 5.5cqi; gap: 1.6cqi; font-size: 3.75cqi; }
+}

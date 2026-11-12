@@ -1,0 +1,259 @@
+/* =====================================================================================
+   DESKTOP FLUIDO (1025px a 1700px) - base 1700px
+   Gerado a partir dos valores px/rem do CSS base (que sao o tamanho em 1700px).
+   So muda: font-size, line-height/letter-spacing em px, padding, margin e tamanho de logos.
+   Formula: cqi = px / 1700 * 100. Acima de 1700px vale o px original; abaixo de 1025px
+   valem os blocos mobile (base 390px).
+   Obs.: sem container-type em nenhum ancestral, 1cqi = 1% da largura da janela (igual 1vw).
+   Nao coloque container-type em html/body/#root, senao cqi passa a ser relativo a ele.
+   ===================================================================================== */
+@media (min-width: 1025px) and (max-width: 1700px) {
+  :root { --fs-min: 12px; }  /* piso de leitura: nenhuma fonte escalada fica menor que isso */
+
+  /* container: 1200px (em vez de 1300px) de 1025px a 1700px; --max alimenta o padding do .pt-track */
+  :root { --max: 1200px; }
+  .container { max-width: 1200px; }
+
+  /* ---- undersoft.css ---- */
+  .nav { margin-top: 0.588cqi; }
+  .logounder { width: 11.765cqi; }
+  .stcntt { margin-left: 0.235cqi; }
+  .nav-inner { padding: 7px 10px 7px 20px; }
+  .brand-mark { width: 2.235cqi; height: 2.235cqi; line-height: 1; }
+  .bntcnheader { padding: 0.471cqi 0.941cqi; font-size: max(1.3cqi, var(--fs-min)); }
+  .nav-links { font-size: max(1.3cqi, var(--fs-min)); padding: 0.588cqi 1.059cqi; }
+  .lang-btn { padding: 0.353cqi 0.588cqi; }
+  .lang-chevron { font-size: max(0.941cqi, var(--fs-min)); }
+  .lang-popup { padding: 0.353cqi; }
+  .lang-option { padding: 0.529cqi 0.588cqi; font-size: max(1.1cqi, var(--fs-min)); }
+  .btn { padding: 0 1.176cqi; font-size: max(1.176cqi, var(--fs-min)); }
+  .btn-primary { padding: 0.588cqi 0.588cqi 0.588cqi 1.176cqi; font-size: max(1.3cqi, var(--fs-min)); }
+  .eyebrow { padding: 0.282cqi 1.129cqi; font-size: max(1.1cqi, var(--fs-min)); margin-bottom: 1.224cqi; }
+  h1 { font-size: max(2.8cqi, var(--fs-min)); line-height: .98; letter-spacing: -.030em; margin-bottom: 0.941cqi; }
+  .hero p { line-height: 1.3; font-size: max(1.4cqi, var(--fs-min)); margin-left: auto; margin-right: auto; margin-bottom: 1.412cqi; }
+  .hero-actions { margin-bottom: 3.176cqi; }
+  .microcopy { font-size: max(0.847cqi, var(--fs-min)); }
+  .hero-card { padding: 1.412cqi; }
+  .window-bar { margin-bottom: 1.176cqi; }
+  .flow-step { padding: 0.941cqi; }
+  .flow-step strong { margin-bottom: 0.235cqi; }
+  .flow-arrow { font-size: max(1.224cqi, var(--fs-min)); }
+  section { padding: 4.941cqi 0; }
+  .section-head { margin-bottom: 2.235cqi; }
+  #problema { padding: 5.882cqi 0; margin-top: -100vh; }
+  .section-head h2 { margin-bottom: 0; font-size: max(3.2cqi, var(--fs-min)); letter-spacing: -.035em; line-height: 1.07; }
+  .section-head p { margin-bottom: 0.118cqi; }
+  .card { padding: 1.412cqi; }
+  .card-icon { font-size: max(1.129cqi, var(--fs-min)); margin-bottom: 1.059cqi; }
+  .card h3 { margin-bottom: 0.588cqi; }
+  .compare { padding: 1.529cqi; }
+  .compare ul { margin: 1.059cqi 0 0; padding: 0; }
+  .timeline-item { padding: 1.176cqi; }
+  .timeline-item span { margin-bottom: 0.941cqi; }
+  .timeline-item p { font-size: max(0.885cqi, var(--fs-min)); margin-bottom: 0; }
+  .offer-main { padding: 2cqi; }
+  .offer-main h2 { font-size: max(3.012cqi, var(--fs-min)); line-height: 1.08; letter-spacing: -.035em; }
+  .case { padding: 1.765cqi; }
+  .case-grid { margin-top: 1.412cqi; }
+  .metric { padding: 1.059cqi; }
+  .metric-head { margin-bottom: 0.941cqi; }
+  .metric strong { font-size: max(1.176cqi, var(--fs-min)); line-height: 1.2; margin: 0; }
+  .metric span { font-size: max(0.866cqi, var(--fs-min)); line-height: 1.7; }
+  .cta { padding: 4.353cqi 1.765cqi; }
+  .cta h2 { font-size: max(3.953cqi, var(--fs-min)); line-height: 1.03; letter-spacing: -.05em; margin-left: auto; margin-right: auto; }
+  .cta p { margin: 0 auto 1.647cqi; }
+  .contact-form-card, .contact-info-card { padding: 1.765cqi; }
+  .contact-form-card h2, .contact-info-card h3 { margin-bottom: 0.706cqi; }
+  .contact-form { margin-top: 1.529cqi; }
+  .form-group label { font-size: max(0.866cqi, var(--fs-min)); }
+  .form-group input, .form-group textarea, .form-group select { padding: 0.824cqi 0.883cqi; }
+  .consent { font-size: max(0.828cqi, var(--fs-min)); }
+  .consent input { margin-top: 0.235cqi; }
+  .form-note { font-size: max(0.791cqi, var(--fs-min)); margin: 0; }
+  .form-status { padding: 0.706cqi 0.824cqi; font-size: max(0.847cqi, var(--fs-min)); }
+  .contact-list { margin-top: 1.529cqi; }
+  .contact-item { padding: 0.941cqi; }
+  .contact-item strong { margin-bottom: 0.118cqi; }
+  .contact-item span { font-size: max(0.847cqi, var(--fs-min)); }
+  .contact-divider { margin: 1.529cqi 0; }
+  .success-modal { padding: 1.176cqi; }
+  .success-modal-card { padding: 1.765cqi; }
+  .success-modal-icon { margin: 0 auto 1.059cqi; font-size: max(1.553cqi, var(--fs-min)); }
+  .success-modal-card h3 { margin-bottom: 0.588cqi; }
+  .success-modal-card p { margin-bottom: 1.294cqi; }
+  .success-dialog-card { padding: 1.765cqi; }
+  .success-dialog-icon { margin: 0 auto 1.059cqi; font-size: max(1.553cqi, var(--fs-min)); }
+  .success-dialog-card h3 { margin-bottom: 0.588cqi; }
+  .success-dialog-card p { margin-bottom: 1.294cqi; }
+  .ut-footer .ut-footer-tagline {font-size: max(1.1cqi, var(--fs-min));}
+  footer { padding: 2.118cqi 0; font-size: max(0.847cqi, var(--fs-min)); }
+  .rotator { margin-right: 0.588cqi; }
+  .typed-cursor { margin-left: 0.353cqi; }
+  .scrolldown { margin-left: auto; margin-right: auto; margin-bottom: 0.941cqi; }
+  .pt-eyebrow {font-size: 1.1rem;}
+  .chevrons { padding: 0.353cqi 0 0 0; margin-top: 2.824cqi; }
+  .chevrondown { margin-top: -0.353cqi; }
+  .loader-percent { font-size: max(1.412cqi, var(--fs-min)); letter-spacing: 0.02em; }
+  .demo-ma-wrapper { margin-bottom: 4.706cqi; }
+  .demo-ma-header { margin-bottom: 3.647cqi; }
+  .demo-ma-connector-star-icon { font-size: max(0.941cqi, var(--fs-min)); }
+  .logoudnr { width: 7.059cqi; }
+  .demo-ma-star-badge i { font-size: max(1.176cqi, var(--fs-min)); }
+  .errmn .fa-solid { font-size: max(1.765cqi, var(--fs-min)); }
+  .crtmn .fa-solid { font-size: max(1.765cqi, var(--fs-min)); }
+  .cdssgmn { font-size: max(1.129cqi, var(--fs-min)); padding: 0.883cqi 1.176cqi; }
+  .sgndbck { padding: 1.765cqi; }
+  .demo-ma-system-panel { padding: 2cqi; border-radius: 4.5cqi; }
+  .demo-ma-panel-header h2 { font-size: max(1.506cqi, var(--fs-min)); margin-bottom: 1.176cqi; margin-top: 0; }
+  .demo-ma-timer-box { padding: 0.471cqi 1cqi; line-height: 1.3; }
+  .demo-ma-timer-label { font-size: max(0.941cqi, var(--fs-min)); }
+  .demo-ma-timer { font-size: max(0.941cqi, var(--fs-min)); }
+  .demo-ma-status-badge { font-size: 0.75rem; padding: 0.235cqi 0.588cqi; }
+  .demo-ma-toast { padding: 0.706cqi 0.941cqi; font-size: max(0.941cqi, var(--fs-min)); }
+  .checkdmee { font-size: max(1.318cqi, var(--fs-min)); }
+  .demo-ma-spreadsheet { font-size: max(1.035cqi, var(--fs-min)); }
+  .demo-ma-spreadsheet th, .demo-ma-spreadsheet td { padding: 0 0.941cqi; }
+  .demo-ma-spreadsheet th { font-size: max(1.129cqi, var(--fs-min)); }
+  .demo-ma-summary-inner { margin: 0 auto 0.588cqi; padding: 1.059cqi; }
+  .demo-ma-summary-row { font-size: max(1.176cqi, var(--fs-min)); }
+  .demo-ma-summary-alert { padding: 0.883cqi; font-size: max(1.059cqi, var(--fs-min)); line-height: 1.4; margin-top: 0.588cqi; }
+  .demo-ma-summary-success { margin-top: 0.412cqi; padding: 0.588cqi; font-size: max(1.059cqi, var(--fs-min)); }
+  .demo-ma-green-text { font-size: max(1.353cqi, var(--fs-min)); }
+  #problem-timeline { padding: 5.882cqi 0 5.294cqi; }
+  #problem-timeline .pt-head { max-width: 52rem; margin: 0 auto 3cqi; }
+  .pt-highlight { padding: 0px 0.941cqi 0.376cqi; line-height: 1.1; }
+  .pt-track { padding-left: max(1.412cqi, calc((100% - var(--max)) / 2)); padding-right: max(1.412cqi, calc((100% - var(--max)) / 2)); }
+  .pt-icon-row { margin-bottom: 1.294cqi; }
+  .pt-icon { /*font-size: max(1.506cqi, var(--fs-min));*/ }
+  .ut-modelo-section { padding: 5.882cqi 0 5.294cqi; }
+  .pt-card-title { font-size: max(1.506cqi, var(--fs-min)); margin-bottom: 0.294cqi; }
+  .pt-card-text { font-size: max(1.294cqi, var(--fs-min)); line-height: 1.2; }
+  .ut-timeline-bg { margin-top: 7.059cqi; }
+  /* cards da timeline (#processo): o CARD mantem o tamanho de >1700px (380x143px, padding e bolinha em px);
+     so os TEXTOS escalam com a largura da tela, na mesma proporcao das outras secoes (base 1700px: 24px / 19px / 45px) */
+  .ut-scope .ut-timeline-pill { flex-shrink: 0; width: 23.75rem; min-height: 130px; box-sizing: border-box; }
+  .ut-scope .ut-timeline-pill h5 { font-size: max(1.412cqi, var(--fs-min)); }
+  .ut-scope .ut-timeline-pill p { font-size: max(1.118cqi, var(--fs-min)); }
+  .ut-scope .ut-timeline-num { font-size: max(2.647cqi, var(--fs-min)); width: 4cqi; height: 4cqi; }
+  .ut-pill-2 { margin-right: 0.588cqi; }
+  .ut-pill-3 { margin-left: 1.765cqi; margin-top: 4.706cqi; }
+  .ut-pill-4 { margin-top: 2.353cqi; margin-right: 1.176cqi; }
+  .ut-pill-5 { margin-left: 2.353cqi; }
+  .sbttl {font-size: 1.2rem;}
+  .demo-ma-header { margin-bottom: 0; padding-bottom: 0.75rem; }
+  #problema { padding-top: max(5.882cqi, var(--hdr-top, 0px)); }
+  .demo-ma-wrapper { margin-bottom: calc(4.706cqi + var(--stack-tail, 0px) - var(--exit-shift, 0px)); }
+  #problem-timeline.pt-hpin { padding: 5.294cqi 0 2.353cqi; }
+  .carddogrd { padding: 0.941cqi 1.059cqi; font-size: max(0.894cqi, var(--fs-min)); line-height: 1.35; }
+  .carddogrd strong { font-size: max(0.941cqi, var(--fs-min)); margin-bottom: 0.118cqi; }
+  .carddogrd .ph-fill { font-size: max(1.506cqi, var(--fs-min)); }
+  .about-slogan { margin: 0 0 0.941cqi; padding: 0.329cqi 0.941cqi; font-size: max(0.847cqi, var(--fs-min)); }
+  .gridtodo { margin-top: 1.176cqi; }
+  .about-card { padding: 2.941cqi; }
+  .about-lead { font-size: max(1.129cqi, var(--fs-min)); line-height: 1.55; margin: 0 0 0.941cqi; }
+  .about-text { font-size: max(0.96cqi, var(--fs-min)); line-height: 1.65; margin: 0 0 1.882cqi; }
+  .about-btn { padding: 0.588cqi 1.176cqi; font-size: max(1.3cqi, var(--fs-min)); margin-top: 1.176cqi; }
+  .descsobr { font-size: max(1.3cqi, var(--fs-min)); margin: 0.588cqi auto 0; line-height: 1.3; }
+  .about-contact { font-size: max(0.866cqi, var(--fs-min)); line-height: 1.5; }
+  .about-badge { padding: 0.659cqi 1.035cqi; line-height: 1.25; }
+  .about-badge span { font-size: max(0.8cqi, var(--fs-min)); }
+  .about-commitments { margin-top: 1.882cqi; }
+  .about-commit { padding: 1.647cqi 1.412cqi; }
+  .about-commit strong { font-size: max(1.6cqi, var(--fs-min)); letter-spacing: -0.02em; }
+  .about-commit span { font-size: max(1cqi, var(--fs-min)); line-height: 1.4; }
+  .about-principles { margin-top: 2.824cqi; }
+  .about-principles-head { font-size: max(0.847cqi, var(--fs-min)); margin-bottom: 1.412cqi; }
+  .about-principle { padding: 1.412cqi; }
+  .about-principle-n { font-size: max(0.8cqi, var(--fs-min)); margin-bottom: 0.941cqi; }
+  .about-principle h3 { font-size: max(1.035cqi, var(--fs-min)); line-height: 1.25; margin: 0 0 0.565cqi; }
+  .about-principle p { margin: 0; font-size: max(0.875cqi, var(--fs-min)); line-height: 1.55; }
+  .pt-scroll { padding-top: 2cqi; margin-top: -2cqi; }
+  .pt-title { font-size: 2rem; }
+  #cta { padding-top: 1.176cqi; }
+  /* ---- legacy-under.css ---- */
+  .ut-scope { line-height: 1.5; padding: 5.882cqi 0 5.294cqi; }
+  .ut-scope section { padding: 5.294cqi 0; }
+  .ut-scope .ut-section-head { margin: 0 auto 2.941cqi; }
+  .ut-scope .ut-btn { font-size: max(0.883cqi, var(--fs-min)); padding: 0.824cqi 1.529cqi; }
+  .ut-scope .ut-btn-primary { padding: 0.588cqi 1.176cqi; font-size: max(1.176cqi, var(--fs-min)); margin-top: 1.765cqi; }
+  .ut-scope .ut-modelo-section { padding-top: 5.882cqi; }
+  .ut-scope .ut-modelo-card { padding: 1.765cqi 1.765cqi 0px 1.765cqi; }
+  .sgncard { padding: 1.647cqi 1.882cqi; }
+  .ut-scope .ut-modelo-card h4 { font-size: max(1.412cqi, var(--fs-min)); margin-bottom: 1.176cqi; }
+  .ut-scope .ut-modelo-card li { font-size: max(1.176cqi, var(--fs-min)); line-height: 1.1; }
+  .ut-scope .ut-mini-card { padding: 1.765cqi; }
+  .ut-scope .ut-mini-icon { font-size: max(0.941cqi, var(--fs-min)); margin-bottom: 0.824cqi; }
+  .ut-scope .ut-mini-card h4 { font-size: max(1.412cqi, var(--fs-min)); margin-bottom: 0.588cqi; }
+  .ut-scope .ut-mini-card p { font-size: max(1cqi, var(--fs-min)); line-height: 1.3; margin: 0; }
+  .ut-scope .ut-escopo-head { margin: 0 auto 4.706cqi; }
+  .ut-scope .ut-timeline-row { margin-bottom: 0.471cqi; }
+  .ut-scope .ut-etapa-card { padding: 2.941cqi 3.529cqi; margin-top: 4.118cqi; }
+  .ut-scope .ut-etapa-card p { font-size: max(1.412cqi, var(--fs-min)); line-height: 1.2; margin-bottom: 0.824cqi; }
+  .ut-scope .ut-etapa-card .ut-btn-primary { margin-top: 1.176cqi; }
+  .ut-scope .ut-contato-wrap { padding: 2.941cqi; }
+  .ut-scope .ut-contato-info { padding: 2.353cqi; }
+  .ut-scope .ut-contato-text { line-height: 1.2; margin: 0; font-size: max(1.224cqi, var(--fs-min)); }
+  .ut-scope .ut-contact-item { line-height: normal; font-size: max(1.3cqi, var(--fs-min)); }
+  .ut-scope .ut-contact-item--phone { padding: 0.412cqi 0.882cqi; }
+  .ut-conttemailbtn { padding: 0.412cqi 0.882cqi; }
+  .ut-scope .ut-contact-icon { font-size: max(1.471cqi, var(--fs-min)); }
+  .ut-scope .ut-contato-social a { font-size: max(1.882cqi, var(--fs-min)); }
+  .ut-scope .ut-contato-form { padding: 2.353cqi; }
+  .ut-scope .ut-form-group label { margin: 0; line-height: normal; font-size: max(1.1cqi, var(--fs-min)); }
+  .ut-scope .ut-form-group input, .ut-scope .ut-form-group textarea { line-height: normal; padding: 0.882cqi 1.176cqi; font-size: max(1.1cqi, var(--fs-min)); }
+  .ut-scope .ut-form-check { line-height: normal; font-size: max(1.059cqi, var(--fs-min)); }
+  .ut-scope .ut-contato-form .ut-btn-primary { margin-top: 0; line-height: normal; font-size: max(1.3cqi, var(--fs-min)); }
+  .ut-scope .ut-form-status { font-size: max(0.941cqi, var(--fs-min)); }
+  .ut-scope .ut-cta-card { padding: 2.941cqi 3.235cqi; }
+  .ut-scope .ut-cta-text p { font-size: max(1.318cqi, var(--fs-min)); margin: 0.588cqi auto 0; line-height: 1.3; }
+  .ut-scope .ut-cta-card .ut-btn { line-height: 1.3; margin: 0; font-size: max(1.3cqi, var(--fs-min)); padding: 0.588cqi 1.176cqi; }
+  .ut-scope .ut-faq-head { margin-bottom: 3.529cqi; }
+  .ut-scope .ut-faq-question { line-height: 1.2; padding: 1.471cqi 1.471cqi 1.471cqi 2.353cqi; font-size: 1.2rem; }
+  .ut-scope .ut-faq-item.is-open .ut-faq-question { padding: 2.353cqi 1.471cqi 0 2.353cqi; }
+  .ut-scope .ut-faq-toggle { font-size: max(1.129cqi, var(--fs-min)); }
+  .ut-scope .ut-faq-item.is-open .ut-faq-toggle { margin-bottom: -1.765cqi; }
+  .ut-scope .ut-faq-answer { margin: 0; line-height: 1.2; padding: 1.471cqi 7cqi 2.353cqi 2.353cqi; font-size: 1rem; }
+  .ut-scope .ut-faq-more { line-height: 1.2; font-size: max(1.1cqi, var(--fs-min)); margin: 1.765cqi 0 0 1.176cqi; }
+  .ut-footer { padding: 2.941cqi 0; }
+  .ut-footer .ut-footer-top { padding-bottom: 5.353cqi; }
+  .ut-footer .ut-footer-logo { height: auto; width: 13cqi; margin: 0.588cqi 0; }
+  .ut-footer .ut-footer-col h5 { letter-spacing: .03em; line-height: 1.83; margin: 0; font-size: max(1.3cqi, var(--fs-min)); }
+  .ut-footer .ut-footer-col a { letter-spacing: .03em; line-height: 1.83; margin: 0; font-size: max(1.2cqi, var(--fs-min)); }
+  .ut-footer .ut-contact-line-icon { font-size: max(1.059cqi, var(--fs-min)); }
+  .ut-footer .ut-footer-col .ut-footer-social a { font-size: max(2cqi, var(--fs-min)); }
+  .ut-footer .ut-footer-bottom { margin: 0; padding: 0; letter-spacing: .03em; line-height: 1.83; padding-top: 5.353cqi; font-size: max(1cqi, var(--fs-min)); }
+  .ut-footer .ut-footer-lang { padding: 0.588cqi 0.882cqi 0.588cqi 0.588cqi; }
+  .ut-scope .ut-contato-text + .ut-contato-text { margin-top: 0.824cqi; }
+  .ut-scope .ut-contact-item--whatsapp { padding: 0.412cqi 0.882cqi; }
+  .ut-scope .ut-review-viewport { padding: 0.471cqi 0; }
+  .ut-scope .ut-review-dots { margin-top: 1.412cqi; }
+  .ut-scope .ut-review-stars { font-size: max(1.2cqi, var(--fs-min)); }
+  .ut-scope .ut-review-card blockquote p { font-size: max(1.2cqi, var(--fs-min)); line-height: 1.3; }
+  .ut-scope .ut-review-meta strong { font-size: max(1.059cqi, var(--fs-min)); }
+  .ut-scope .ut-review-meta span { font-size: max(0.941cqi, var(--fs-min)); }
+  .ut-scope .ut-logos-card { padding: 2.353cqi 1.882cqi; }
+
+  /* ---- ajustes que existiam so no bloco antigo 1025-1300 (re-basados para 1700) ---- */
+  .ut-scope .ut-etapa-card h2 { font-size: max(1.765cqi, var(--fs-min)); margin: 0.353cqi 0 0.941cqi; }
+ 
+
+  /* ---- logos da secao Integracoes: --wn = largura em rem (16px) ---- */
+  .ut-scope .ut-logos-logo { width: calc(var(--wn, 8) * 0.941cqi); }
+  .ut-scope .ut-logos-text { font-size: max(1.412cqi, var(--fs-min)); }
+
+  /* ---- titulo da secao Problema (#problema): fica fixo (sticky) como acima de 1700px; regra base em undersoft.css ---- */
+
+  /* ---- topo das secoes: reserva espaco para o cabecalho fixo (valores base de 1700px em cqi) ---- */
+  #problema { padding-top: max(5.882cqi, var(--hdr-top, 0px)); }
+}
+
+
+/* telas baixas: mesma regra existente, agora com os tamanhos em cqi dentro da faixa */
+@media (min-width: 1025px) and (max-width: 1700px) and (max-height: 725px) {
+  .hero { padding: 15vh 0 4.118cqi; }
+}
+
+/* telas baixas: mesma regra existente, agora com os tamanhos em cqi dentro da faixa */
+@media (min-width: 1025px) and (max-width: 1700px) and (max-height: 860px) {
+  .demo-ma-header { padding-bottom: 0.75rem; }
+}
