@@ -8,6 +8,8 @@ const page = (file) => path.resolve(import.meta.dirname, file)
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  // Porta propria (registo de portas do utilizador): 5173 e a da Stara. strictPort = nao salta para a porta de outro projeto.
+  server: { port: 5191, strictPort: true },
   build: {
     rollupOptions: {
       input: {

@@ -20,20 +20,30 @@ npm run build
 npm run preview
 ```
 
-## Deploy (GitHub Pages)
+## Deploy (Cloudflare Pages)
 
-O site publica em `https://undersoft.pt` (domínio em `public/CNAME`).
+O site publica em `https://undersoft.pt` pelo projeto Cloudflare Pages **`undersoft-pt`**
+(upload direto, branch de produção `main`, mesma conta dos outros sites). Desde 12/11/2026 não usa mais o GitHub Pages.
 
-- Cada `git push` na `main` roda `.github/workflows/deploy.yml`: ele faz
-  `npm ci`, `npm run build` e publica a pasta `dist/`.
-- O Pages do repositório usa a fonte **GitHub Actions** (não "Deploy from a branch").
-  Com "Deploy from a branch" o Pages serve o código-fonte cru e o site não abre.
-- Para rodar o deploy sem commit: aba **Actions** > *Deploy para GitHub Pages* > *Run workflow*.
-- O formulário usa duas variáveis de build (ver `.env.example` e `worker/README.md`).
-  Defina-as em *Settings > Secrets and variables > Actions > Variables*:
-  `VITE_TURNSTILE_SITE_KEY` e `VITE_CONTACT_ENDPOINT`.
-  Sem elas, o formulário envia direto ao Formspree, sem captcha.
-- O DNS de `undersoft.pt` aponta para o GitHub Pages (IPs `185.199.108-111.153`).
+- Cada `git push` na `main` roda `.github/workflows/deploy.yml`: ele faz `npm ci`, `npm run build` e
+  `wrangler pages deploy dist --project-name=undersoft-pt --branch=main`.
+- O workflow precisa do secret **`CLOUDFLARE_API_TOKEN`** (token de conta **só com a permissão "Pages Write"**, criado só para este
+  site) e da variável **`CLOUDFLARE_ACCOUNT_ID`** (identificador da conta, não é segredo). Ficam em
+  *Settings > Secrets and variables > Actions*.
+- Para publicar sem commit: aba **Actions** > *Deploy para Cloudflare Pages* > *Run workflow* (só na branch `main`).
+- Deploy manual, da sua máquina: `npm run build` e `npx wrangler pages deploy dist --project-name=undersoft-pt --branch=main`
+  (com `CLOUDFLARE_API_TOKEN` e `CLOUDFLARE_ACCOUNT_ID` no ambiente). Defina `VITE_TURNSTILE_SITE_KEY` (a site key **real**) no ambiente do
+  build: sem ela o captcha não aparece. A site key de **teste** do dev fica em `.env.development.local`, que o Vite só lê no `npm run dev`
+  (nunca use um `.env.local` com a chave de teste: ele entraria no build de produção).
+- DNS (zona `undersoft.pt` na Cloudflare): `undersoft.pt` e `www` são CNAME (com proxy) para o `undersoft-pt.pages.dev`.
+  O apex é domínio personalizado do projeto (ativo). O `www` redireciona (301) para o apex por uma Redirect Rule da zona, que age
+  antes do Pages; por isso o `www` fica como `pending` na lista de domínios do projeto (a validação do Pages bate na regra) e isso é esperado.
+  A mesma zona tem outra regra que leva `http://undersoft.pt` para `https`. O e-mail (MX/TXT do Email Routing) não muda.
+- `*.pages.dev` não é indexado (`public/_headers` manda `X-Robots-Tag: noindex` só nesse host).
+- A zona injeta no `robots.txt` do domínio o bloco "Managed content" da Cloudflare (bloqueia bots de IA); isso vem da zona, não do arquivo `public/robots.txt`.
+- O formulário usa o Worker `undersoft-contact` e o Turnstile (ver `worker/README.md`). Variáveis de build opcionais
+  (*Settings > Secrets and variables > Actions > Variables*): `VITE_TURNSTILE_SITE_KEY` (obrigatória para o captcha aparecer)
+  e `VITE_CONTACT_ENDPOINT` (opcional: o padrão já é o Worker de produção).
 
 ## O que foi feito
 
@@ -44,7 +54,7 @@ O site publica em `https://undersoft.pt` (domínio em `public/CNAME`).
   do novo background).
 - Toda a lógica que estava em `script.js` (loader, efeito de
   "máquina de escrever" no hero, indicador de menu deslizante,
-  seletor de idioma, envio do formulário via Formspree, e a
+  seletor de idioma, envio do formulário (hoje por um Worker da Cloudflare com Turnstile), e a
   simulação "manual vs automático") foi portada para hooks React
   (`useEffect`/`useRef`/`useState`), mantendo o mesmo comportamento
   visual.
@@ -86,7 +96,7 @@ src/
     ProcessSection.jsx        # timeline do processo
     DiagnosticSection.jsx     # CTA de diagnóstico
     CaseSection.jsx            # case de sucesso (antes/depois/resultado)
-    ContactSection.jsx        # formulário (Formspree)
+    ContactSection.jsx        # formulário (Worker da Cloudflare + Turnstile)
     SuccessDialog.jsx         # modal de sucesso do formulário
     Footer.jsx
 ```

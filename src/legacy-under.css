@@ -1244,9 +1244,8 @@
   .ut-scope .ut-btn .ut-spinner { animation-duration: 1.6s; }
 }
 
-/* Cloudflare Turnstile invisivel: sem altura, so ocupa espaco se a Cloudflare pedir interacao */
-.ut-scope .ut-turnstile:empty { display: none; }
-.ut-scope .ut-turnstile { display: flex; justify-content: center; }
+/* Cloudflare Turnstile visivel (abaixo de "aceito os termos"). A altura fixa evita salto no layout enquanto o widget carrega. */
+.ut-scope .ut-turnstile { min-height: 65px; max-width: 100%; }
 
 .ut-sr-only {
   position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;

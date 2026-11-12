@@ -1,0 +1,7 @@
+# Cloudflare Pages: o endereco *.pages.dev (e as previas dos deploys) nao deve ser indexado.
+# O site oficial e https://undersoft.pt (canonical em todas as paginas); estas regras so casam com o host pages.dev.
+https://:project.pages.dev/*
+  X-Robots-Tag: noindex
+
+https://:version.:project.pages.dev/*
+  X-Robots-Tag: noindex

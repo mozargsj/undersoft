@@ -283,6 +283,10 @@ export const TRANSLATIONS = {
         button: { idle: "Pedir a minha proposta", validating: "A validar...", sending: "A enviar..." },
         errorValidate:
           "Não foi possível validar o pedido. Atualize a página e tente novamente ou escreva para contacto@undersoft.pt.",
+        errorCaptcha: "Confirme que não é um robô para enviar o pedido.",
+        captchaTitle: "Confirmação de segurança",
+        captchaPrompt: "Confirme que é uma pessoa para enviar o seu pedido.",
+        captchaClose: "Fechar",
         errorSend: "Não foi possível enviar o pedido. Tente novamente ou escreva para contacto@undersoft.pt.",
       },
     },
@@ -659,6 +663,10 @@ export const TRANSLATIONS = {
         button: { idle: "Solicitar minha proposta", validating: "Validando...", sending: "Enviando..." },
         errorValidate:
           "Não foi possível validar a solicitação. Atualize a página e tente novamente ou escreva para contacto@undersoft.pt.",
+        errorCaptcha: "Confirme que você não é um robô para enviar a solicitação.",
+        captchaTitle: "Confirmação de segurança",
+        captchaPrompt: "Confirme que é uma pessoa para enviar a sua solicitação.",
+        captchaClose: "Fechar",
         errorSend: "Não foi possível enviar a solicitação. Tente novamente ou escreva para contacto@undersoft.pt.",
       },
     },
@@ -1070,6 +1078,10 @@ export const TRANSLATIONS = {
         button: { idle: "Request my proposal", validating: "Validating...", sending: "Sending..." },
         errorValidate:
           "We couldn't validate your request. Refresh the page and try again, or email contacto@undersoft.pt.",
+        errorCaptcha: "Please confirm you are not a robot before sending.",
+        captchaTitle: "Security check",
+        captchaPrompt: "Confirm that you are human to send your request.",
+        captchaClose: "Close",
         errorSend: "We couldn't send your request. Please try again or email contacto@undersoft.pt.",
       },
     },
@@ -1481,6 +1493,10 @@ export const TRANSLATIONS = {
         button: { idle: "Solicitar mi propuesta", validating: "Validando...", sending: "Enviando..." },
         errorValidate:
           "No hemos podido validar la solicitud. Actualice la página e inténtelo de nuevo, o escriba a contacto@undersoft.pt.",
+        errorCaptcha: "Confirme que no es un robot antes de enviar la solicitud.",
+        captchaTitle: "Comprobación de seguridad",
+        captchaPrompt: "Confirme que es una persona para enviar su solicitud.",
+        captchaClose: "Cerrar",
         errorSend: "No hemos podido enviar la solicitud. Inténtelo de nuevo o escriba a contacto@undersoft.pt.",
       },
     },

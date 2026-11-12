@@ -108,7 +108,7 @@ export default {
         "Los datos pueden comunicarse a entidades que tratan datos por cuenta de Undersoft (encargados del tratamiento), vinculadas por contrato conforme al artículo 28 del RGPD, y a entidades que los reciben en virtud de una obligación legal. En concreto:",
         {
           ul: [
-            "proveedores del formulario de contacto (actualmente, Formspree), de protección contra spam y abusos (Cloudflare Turnstile y Cloudflare Workers) y de alojamiento e infraestructura del sitio web;",
+            "proveedores del formulario de contacto y del envío de su correo electrónico (Cloudflare Workers y Cloudflare Email Routing), de protección contra spam y abusos (Cloudflare Turnstile) y de alojamiento e infraestructura del sitio web;",
             "proveedores de correo electrónico, comunicación y productividad;",
             "contable certificado y software de facturación;",
             "asesores jurídicos, auditores y aseguradoras, cuando sea necesario;",

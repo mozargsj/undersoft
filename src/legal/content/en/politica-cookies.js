@@ -59,7 +59,7 @@ export default {
       id: "terceiros",
       title: "Third-party resources",
       blocks: [
-        "The website loads third-party resources in order to function, such as fonts, icons and flags (Google Fonts, cdnjs, unpkg and FlagCDN), and uses external services for the contact form: Formspree, to receive submissions, and Cloudflare Turnstile (with a Cloudflare Worker), which protects the form against spam and abuse. For security reasons, Turnstile is considered strictly necessary and does not depend on consent. To the best of Undersoft's knowledge, these services do not set tracking cookies in this context, but they do receive the IP address and technical data of the request. See the [Privacy Policy](" + LEGAL_PAGES["politica-de-privacidade"] + ") for more information.",
+        "The website loads third-party resources in order to function, such as fonts, icons and flags (Google Fonts, cdnjs, unpkg and FlagCDN), and uses external services for the contact form: Cloudflare Turnstile (with a Cloudflare Worker), which protects the form against spam and abuse. For security reasons, Turnstile is considered strictly necessary and does not depend on consent. To the best of Undersoft's knowledge, these services do not set tracking cookies in this context, but they do receive the IP address and technical data of the request. See the [Privacy Policy](" + LEGAL_PAGES["politica-de-privacidade"] + ") for more information.",
         "When you follow links to LinkedIn, Instagram, WhatsApp or other external websites, the cookie policies of those websites apply.",
       ],
     },

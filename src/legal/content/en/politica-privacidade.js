@@ -108,7 +108,7 @@ export default {
         "The data may be disclosed to entities that process data on Undersoft's behalf (processors), bound by contract pursuant to Article 28 of the GDPR, and to entities that receive it under a legal obligation. Specifically:",
         {
           ul: [
-            "providers of the contact form (currently Formspree), of spam and abuse protection (Cloudflare Turnstile and Cloudflare Workers) and of hosting and infrastructure for the website;",
+            "providers of the contact form and of the delivery of its email (Cloudflare Workers and Cloudflare Email Routing), of spam and abuse protection (Cloudflare Turnstile) and of hosting and infrastructure for the website;",
             "providers of email, communication and productivity services;",
             "the certified accountant and invoicing software;",
             "legal advisers, auditors and insurers, where necessary;",

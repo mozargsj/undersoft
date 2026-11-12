@@ -15,14 +15,14 @@ export const COMPANY = {
   registry: "[conservatória do registo comercial e número de matrícula]",
 };
 
-export const LAST_UPDATED = "11 de novembro de 2026";
+export const LAST_UPDATED = "12 de novembro de 2026";
 
 // Data da última atualização escrita por extenso em cada idioma.
 export const LAST_UPDATED_BY_LANG = {
   "pt-PT": LAST_UPDATED,
-  "pt-BR": "11 de novembro de 2026",
-  en: "11 November 2026",
-  es: "11 de noviembre de 2026",
+  "pt-BR": "12 de novembro de 2026",
+  en: "12 November 2026",
+  es: "12 de noviembre de 2026",
 };
 
 export const LEGAL_PAGES = {

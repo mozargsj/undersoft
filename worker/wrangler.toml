@@ -5,10 +5,11 @@ compatibility_date = "2026-11-01"
 [vars]
 ALLOWED_ORIGINS = "https://undersoft.pt,https://www.undersoft.pt"
 MAIL_FROM = "site@undersoft.pt"
-MAIL_TO = "SEU-EMAIL@exemplo.com"
 
 [[send_email]]
 name = "EMAIL"
 
-# Secret key do Turnstile (NAO colocar aqui):
-#   npx wrangler secret put TURNSTILE_SECRET
+# Segredos (NAO colocar aqui: o repositorio e publico):
+#   npx wrangler secret put TURNSTILE_SECRET   # secret key do widget Turnstile
+#   npx wrangler secret put MAIL_TO            # destinatario: tem de ser um destino VERIFICADO no Email Routing
+#                                               # (o mesmo para onde contacto@undersoft.pt encaminha)

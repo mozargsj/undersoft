@@ -1,14 +1,12 @@
-// Cloudflare Turnstile em modo invisivel: o visitante nao ve nada.
-// O widget so corre quando chamamos getTurnstileToken() (execution: "execute").
-// Cada token e de uso unico e expira em ~5 min, por isso fazemos reset antes de cada pedido.
+// Cloudflare Turnstile aparece apenas quando o envio exige validacao manual.
+// O widget tenta validar o visitante automaticamente; o token chega por onToken.
+// onToken("") = token invalido (expirou, deu erro ou o desafio esgotou o tempo): o envio fica bloqueado.
 
 const SCRIPT_SRC = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
-const TIMEOUT_MS = 20000;
 
 export const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY || "";
 
 let scriptPromise = null;
-const state = { widgetId: null, pending: null };
 
 export function loadTurnstile() {
   if (typeof window === "undefined") return Promise.reject(new Error("no-window"));
@@ -30,39 +28,22 @@ export function loadTurnstile() {
   return scriptPromise;
 }
 
-function settle(kind, value) {
-  const p = state.pending;
-  if (!p) return;
-  state.pending = null;
-  clearTimeout(p.timer);
-  p[kind](value);
+// Desenha o widget dentro de `container` e devolve o id dele (para o reset).
+export async function renderTurnstile(container, onToken) {
+  const turnstile = await loadTurnstile();
+  return turnstile.render(container, {
+    sitekey: TURNSTILE_SITE_KEY,
+    theme: "light", // o cartao do formulario e claro
+    size: "flexible",
+    appearance: "interaction-only", // oculta o widget se a verificacao automatica for suficiente
+    callback: (token) => onToken(token),
+    "error-callback": () => onToken(""),
+    "expired-callback": () => onToken(""),
+    "timeout-callback": () => onToken(""),
+  });
 }
 
-// Devolve um token novo. Rejeita em caso de erro/timeout.
-export async function getTurnstileToken(container) {
-  const turnstile = await loadTurnstile();
-
-  return new Promise((resolve, reject) => {
-    settle("reject", new Error("turnstile-superseded"));
-    state.pending = {
-      resolve,
-      reject,
-      timer: setTimeout(() => settle("reject", new Error("turnstile-timeout")), TIMEOUT_MS),
-    };
-
-    if (state.widgetId === null) {
-      state.widgetId = turnstile.render(container, {
-        sitekey: TURNSTILE_SITE_KEY,
-        execution: "execute",
-        appearance: "interaction-only", // so aparece se a Cloudflare exigir interacao
-        callback: (token) => settle("resolve", token),
-        "error-callback": () => settle("reject", new Error("turnstile-error")),
-        "timeout-callback": () => settle("reject", new Error("turnstile-timeout")),
-        "expired-callback": () => {},
-      });
-    } else {
-      turnstile.reset(state.widgetId);
-    }
-    turnstile.execute(state.widgetId);
-  });
+// Token de uso unico: depois de cada envio (certo ou errado) pede-se um novo.
+export function resetTurnstile(widgetId) {
+  if (widgetId !== null && window.turnstile) window.turnstile.reset(widgetId);
 }

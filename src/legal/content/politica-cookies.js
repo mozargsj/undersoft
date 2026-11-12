@@ -62,7 +62,7 @@ export default {
       id: "terceiros",
       title: "Recursos de terceiros",
       blocks: [
-        "O website carrega recursos de terceiros para funcionar, como tipos de letra, ícones e bandeiras (Google Fonts, cdnjs, unpkg e FlagCDN), e utiliza serviços externos no formulário de contacto: o Formspree, para receber os pedidos, e o Cloudflare Turnstile (com um Worker da Cloudflare), que protege o formulário contra spam e abusos. Por razões de segurança, o Turnstile é considerado estritamente necessário e não depende de consentimento. Tanto quanto é do conhecimento da Undersoft, estes serviços não definem cookies de acompanhamento neste contexto, mas recebem o endereço IP e dados técnicos do pedido. Veja a [Política de Privacidade](" + LEGAL_PAGES["politica-de-privacidade"] + ") para mais informação.",
+        "O website carrega recursos de terceiros para funcionar, como tipos de letra, ícones e bandeiras (Google Fonts, cdnjs, unpkg e FlagCDN), e utiliza serviços externos no formulário de contacto: o Cloudflare Turnstile (com um Worker da Cloudflare), que protege o formulário contra spam e abusos. Por razões de segurança, o Turnstile é considerado estritamente necessário e não depende de consentimento. Tanto quanto é do conhecimento da Undersoft, estes serviços não definem cookies de acompanhamento neste contexto, mas recebem o endereço IP e dados técnicos do pedido. Veja a [Política de Privacidade](" + LEGAL_PAGES["politica-de-privacidade"] + ") para mais informação.",
         "Ao seguir ligações para LinkedIn, Instagram, WhatsApp ou outros sites externos, aplicam-se as políticas de cookies desses sites.",
       ],
     },

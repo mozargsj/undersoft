@@ -3,22 +3,28 @@ import { EMAIL, PHONE, SOCIALS, WHATSAPP } from "./socials";
 import TermsDialog from "./TermsDialog";
 import { politicaPrivacidade } from "../legal/content";
 import { useI18n } from "../i18n/I18nContext";
-import { TURNSTILE_SITE_KEY, getTurnstileToken, loadTurnstile } from "../lib/turnstile";
+import { TURNSTILE_SITE_KEY, renderTurnstile, resetTurnstile } from "../lib/turnstile";
 
-// Com VITE_CONTACT_ENDPOINT definido, o pedido vai para o Worker (valida o Turnstile e reencaminha).
-const FORM_ENDPOINT = import.meta.env.VITE_CONTACT_ENDPOINT || "https://formspree.io/f/xojgbwqj";
+// O pedido vai para o Worker `undersoft-contact` (valida o Turnstile e envia o e-mail pela Cloudflare).
+// VITE_CONTACT_ENDPOINT so serve para apontar outro Worker (ex.: dev local); o padrao e o de producao.
+const FORM_ENDPOINT = import.meta.env.VITE_CONTACT_ENDPOINT || "https://undersoft-contact.mozargsj.workers.dev";
 const THANKS_URL = "/obrigado/";
 
 export default function ContactSection() {
   const { t } = useI18n();
   const BUTTON_LABEL = t("contact.form.button");
   const [status, setStatus] = useState({ visible: false, message: "" });
-  const [phase, setPhase] = useState("idle"); // idle | validating | sending
+  const [phase, setPhase] = useState("idle"); // idle | sending
   const isSubmitting = phase !== "idle";
   const [termsOpen, setTermsOpen] = useState(false);
   const [privacyOpen, setPrivacyOpen] = useState(false);
+  const [captchaOpen, setCaptchaOpen] = useState(false);
   const formRef = useRef(null);
   const turnstileRef = useRef(null);
+  const captchaDialogRef = useRef(null);
+  const widgetId = useRef(null);
+  const captchaStarted = useRef(false);
+  const captchaToken = useRef("");
 
   // Voltar atras (cache do navegador) nao deve deixar o botao preso a "A enviar..."
   useEffect(() => {
@@ -27,9 +33,44 @@ export default function ContactSection() {
     return () => window.removeEventListener("pageshow", onPageShow);
   }, []);
 
-  // Pre-carrega o script do Turnstile quando a pessoa comeca a preencher (nao pesa no carregamento inicial)
-  function preloadCaptcha() {
-    if (TURNSTILE_SITE_KEY) loadTurnstile().catch(() => {});
+  // O Turnstile so e carregado quando o envio precisa de validacao manual.
+  function mountCaptcha() {
+    if (!TURNSTILE_SITE_KEY || captchaStarted.current || !turnstileRef.current) return;
+    captchaStarted.current = true;
+    renderTurnstile(turnstileRef.current, (token) => {
+      captchaToken.current = token;
+      if (token) {
+        setCaptchaOpen(false);
+        formRef.current?.requestSubmit();
+      }
+    })
+      .then((id) => (widgetId.current = id))
+      .catch(() => (captchaStarted.current = false)); // bloqueado/sem rede: tenta de novo ao focar o formulario
+  }
+
+  useEffect(() => {
+    const dialog = captchaDialogRef.current;
+    if (!dialog) return;
+    if (captchaOpen && !dialog.open) {
+      dialog.showModal();
+      mountCaptcha();
+    } else if (!captchaOpen && dialog.open) {
+      dialog.close();
+    }
+  }, [captchaOpen]);
+
+  useEffect(() => {
+    const dialog = captchaDialogRef.current;
+    if (!dialog) return undefined;
+    const close = () => setCaptchaOpen(false);
+    dialog.addEventListener("cancel", close);
+    return () => dialog.removeEventListener("cancel", close);
+  }, []);
+
+  // Token de uso unico: renova depois de cada envio que nao terminou em "obrigado"
+  function renewCaptcha() {
+    captchaToken.current = "";
+    resetTurnstile(widgetId.current);
   }
 
   // "Li e aceito" no popup marca a caixa do formulario
@@ -58,20 +99,12 @@ export default function ContactSection() {
       const data = new FormData(form);
 
       if (TURNSTILE_SITE_KEY) {
-        setPhase("validating");
-        let token;
-        try {
-          token = await getTurnstileToken(turnstileRef.current);
-        } catch {
-          setStatus({
-            visible: true,
-            message:
-              t("contact.form.errorValidate"),
-          });
-          setPhase("idle");
+        // Sem token, pedir a validacao manual dentro do popup.
+        if (!captchaToken.current) {
+          setCaptchaOpen(true);
           return;
         }
-        data.set("cf-turnstile-response", token);
+        data.set("cf-turnstile-response", captchaToken.current);
       }
 
       setPhase("sending");
@@ -92,6 +125,7 @@ export default function ContactSection() {
         message:
           t("contact.form.errorSend"),
       });
+      renewCaptcha();
       setPhase("idle");
     }
   }
@@ -153,7 +187,6 @@ export default function ContactSection() {
             className="ut-contato-form"
             ref={formRef}
             onSubmit={handleSubmit}
-            onFocus={preloadCaptcha}
           >
             <div className="ut-form-group">
               <label htmlFor="nome">{t("contact.form.name")}</label>
@@ -222,9 +255,6 @@ export default function ContactSection() {
               </div>
             )}
 
-            {/* Turnstile invisivel: o widget e renderizado aqui, mas o visitante nao o ve */}
-            <div ref={turnstileRef} className="ut-turnstile" aria-hidden="true"></div>
-
             <button
               className={`ut-btn ut-btn-primary${isSubmitting ? " is-loading" : ""}`}
               type="submit"
@@ -244,6 +274,19 @@ export default function ContactSection() {
 
     <TermsDialog isOpen={termsOpen} onClose={() => setTermsOpen(false)} onAccept={acceptTerms} />
     <TermsDialog id="privacyDialog" doc={politicaPrivacidade} isOpen={privacyOpen} onClose={() => setPrivacyOpen(false)} onAccept={acceptTerms} />
+    {TURNSTILE_SITE_KEY && (
+      <dialog className="ut-captcha-dialog" ref={captchaDialogRef} aria-labelledby="captchaDialogTitle">
+        <div className="ut-captcha-card">
+          <div className="ut-captcha-icon" aria-hidden="true"><i className="fa-solid fa-shield-halved"></i></div>
+          <h3 id="captchaDialogTitle">{t("contact.form.captchaTitle")}</h3>
+          <p>{t("contact.form.captchaPrompt")}</p>
+          <div ref={turnstileRef} className="ut-turnstile" />
+          <button className="ut-btn ut-btn-primary" type="button" onClick={() => setCaptchaOpen(false)}>
+            {t("contact.form.captchaClose")}
+          </button>
+        </div>
+      </dialog>
+    )}
     </>
   );
 }

@@ -1,4 +1,4 @@
-name: Deploy para GitHub Pages
+name: Deploy para Cloudflare Pages
 
 on:
   push:
@@ -7,19 +7,17 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: pages
+  group: cloudflare-pages
   cancel-in-progress: true
 
 jobs:
   deploy:
+    # So publica a main: o comando abaixo forca --branch=main, entao um "Run workflow" em outra branch
+    # publicaria o codigo DESSA branch em producao. Fora da main, o job nem roda.
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -27,14 +25,21 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - run: npm run build
+      - name: Build
+        # Sem a site key o widget nao aparece e o Worker recusa o envio: melhor falhar aqui do que publicar um formulario quebrado.
+        run: |
+          test -n "$VITE_TURNSTILE_SITE_KEY" || { echo "::error::A variavel VITE_TURNSTILE_SITE_KEY esta vazia"; exit 1; }
+          npm run build
         env:
-          # Variáveis do repositório (Settings > Secrets and variables > Actions > Variables).
-          # Vazias = o formulário envia direto ao Formspree, sem captcha (ver .env.example).
+          # Variaveis do repositorio (Settings > Secrets and variables > Actions > Variables). Ver .env.example.
           VITE_TURNSTILE_SITE_KEY: ${{ vars.VITE_TURNSTILE_SITE_KEY }}
           VITE_CONTACT_ENDPOINT: ${{ vars.VITE_CONTACT_ENDPOINT }}
-      - uses: actions/upload-pages-artifact@v3
+      - name: Publicar no Cloudflare Pages
+        # Action de terceiros que recebe o token: fixada no commit exato (tag v3.15.0), nao na tag movel.
+        uses: cloudflare/wrangler-action@9acf94ace14e7dc412b076f2c5c20b8ce93c79cd # v3.15.0
         with:
-          path: dist
-      - id: deployment
-        uses: actions/deploy-pages@v4
+          wranglerVersion: "4.161.0"
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          # --branch=main explicito: deploy de producao (o job so roda na main, ver "if" acima).
+          command: pages deploy dist --project-name=undersoft-pt --branch=main
