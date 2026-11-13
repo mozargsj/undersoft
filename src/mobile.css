@@ -62,8 +62,8 @@
   }
 
   .container {
-    width: calc(100% - 2 * var(--pad)) !important;
-    max-width: 44rem;
+    width: 100% !important;
+    max-width: 100%;
     margin-inline: auto;
   }
 
