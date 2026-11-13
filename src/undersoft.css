@@ -34,6 +34,10 @@
       line-height:1.6;
     }
 
+    button {
+      cursor: pointer;
+    }
+
     /* Home: o body e claro (#F7F6F0), mas o <html> e escuro (#1a1410). Com background no html, o body deixa
        de pintar o fundo do viewport: antes do React montar (body vazio) aparece o escuro, sem flash claro.
        As paginas legais/obrigado nao tem a classe .home e seguem com o body creme no viewport. */
