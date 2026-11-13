@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /pages/obrigado/
+Disallow: /pages/obrigado.html
 
 Sitemap: https://undersoft.pt/sitemap.xml

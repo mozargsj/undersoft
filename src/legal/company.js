@@ -23,10 +23,10 @@ export const LAST_UPDATED_BY_LANG = {
 };
 
 export const LEGAL_PAGES = {
-  "termos-e-condicoes": "/pages/termos-e-condicoes/",
-  "termos-de-servico": "/pages/termos-de-servico/",
-  "politica-de-privacidade": "/pages/politica-de-privacidade/",
-  "politica-de-cookies": "/pages/politica-de-cookies/",
+  "termos-e-condicoes": "/pages/termos-e-condicoes.html",
+  "termos-de-servico": "/pages/termos-de-servico.html",
+  "politica-de-privacidade": "/pages/politica-de-privacidade.html",
+  "politica-de-cookies": "/pages/politica-de-cookies.html",
 };
 
 export const COMPLAINTS_URL = "https://www.livroreclamacoes.pt";
