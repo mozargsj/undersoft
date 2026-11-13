@@ -35,6 +35,91 @@ html:has(.lg-dialog[open]) { overflow: hidden; scrollbar-gutter: stable; }
 
 .lg-dialog::backdrop { background: rgba(0, 0, 0, .65); }
 
+/* ---------- Validacao do Turnstile: modal centrado com o tema da marca ---------- */
+html:has(.ut-captcha-dialog[open]) { overflow: hidden; scrollbar-gutter: stable; }
+
+.ut-captcha-dialog {
+  position: fixed;
+  inset: 0;
+  width: min(calc(100vw - 2rem), 27rem);
+  max-width: none;
+  max-height: min(calc(100vh - 2rem), 32rem);
+  max-height: min(calc(100dvh - 2rem), 32rem);
+  margin: auto;
+  padding: 0;
+  overflow: auto;
+  border: 0;
+  border-radius: 1.5rem;
+  color: #2e2420;
+  background: transparent;
+}
+
+.ut-captcha-dialog::backdrop {
+  background: rgba(26, 20, 16, .68);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+.ut-captcha-card {
+  box-sizing: border-box;
+  width: 100%;
+  padding: clamp(1.25rem, 6vw, 2rem);
+  text-align: center;
+  background: #fff;
+  border: 1px solid rgba(46, 36, 32, .08);
+  border-radius: inherit;
+  box-shadow: 0 24px 72px rgba(26, 20, 16, .24);
+}
+
+.ut-captcha-icon {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  margin: 0 auto 1rem;
+  border-radius: 50%;
+  color: #ff5220;
+  background: rgba(255, 82, 32, .1);
+  font-size: 1.25rem;
+}
+
+.ut-captcha-card h3 {
+  margin: 0 0 .5rem;
+  color: #2e2420;
+  font-size: 1.35rem;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -.02em;
+}
+
+.ut-captcha-card p {
+  margin: 0 0 1.25rem;
+  color: #666563;
+  font-size: .95rem;
+  line-height: 1.5;
+}
+
+.ut-captcha-card .ut-turnstile {
+  display: flex;
+  justify-content: center;
+  min-height: 0;
+  margin: 0 auto 1rem;
+}
+
+.ut-captcha-card .ut-btn { width: 100%; justify-content: center; }
+
+@media (max-width: 360px) {
+  .ut-captcha-card { padding: 1.125rem .75rem; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ut-captcha-dialog[open] .ut-captcha-card { animation: captcha-enter .24s cubic-bezier(.22, 1, .36, 1); }
+  @keyframes captcha-enter {
+    from { opacity: 0; transform: translateY(8px) scale(.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+}
+
 .lg-sheet {
   display: flex; flex-direction: column;
   max-height: min(calc(100vh - 3rem), 50rem);
