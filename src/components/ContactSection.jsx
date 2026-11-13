@@ -8,7 +8,7 @@ import { TURNSTILE_SITE_KEY, renderTurnstile, resetTurnstile } from "../lib/turn
 // O pedido vai para o Worker `undersoft-contact` (valida o Turnstile e envia o e-mail pela Cloudflare).
 // VITE_CONTACT_ENDPOINT so serve para apontar outro Worker (ex.: dev local); o padrao e o de producao.
 const FORM_ENDPOINT = import.meta.env.VITE_CONTACT_ENDPOINT || "https://undersoft-contact.mozargsj.workers.dev";
-const THANKS_URL = "/obrigado/";
+const THANKS_URL = "/pages/obrigado";
 
 export default function ContactSection() {
   const { t } = useI18n();
