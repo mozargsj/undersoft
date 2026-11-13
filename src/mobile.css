@@ -24,6 +24,9 @@
     .container {
       margin-inline: 0 !important;
       padding: 0 min(4.5cqi, 18px);
+      width: 100% !important;
+      max-width: 100% !important;
+      margin-inline: auto;
     }
 }
 
@@ -62,8 +65,8 @@
   }
 
   .container {
-    width: 100% !important;
-    max-width: 100%;
+    width: calc(100% - 2 * var(--pad));
+    max-width: 44rem;
     margin-inline: auto;
   }
 
