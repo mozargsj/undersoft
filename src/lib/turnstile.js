@@ -29,13 +29,14 @@ export function loadTurnstile() {
 }
 
 // Desenha o widget dentro de `container` e devolve o id dele (para o reset).
-export async function renderTurnstile(container, onToken) {
+export async function renderTurnstile(container, onToken, onBeforeInteractive) {
   const turnstile = await loadTurnstile();
   return turnstile.render(container, {
     sitekey: TURNSTILE_SITE_KEY,
     theme: "light", // o cartao do formulario e claro
     size: "flexible",
     appearance: "interaction-only", // oculta o widget se a verificacao automatica for suficiente
+    "before-interactive-callback": onBeforeInteractive,
     callback: (token) => onToken(token),
     "error-callback": () => onToken(""),
     "expired-callback": () => onToken(""),

@@ -33,19 +33,60 @@ export default function ContactSection() {
     return () => window.removeEventListener("pageshow", onPageShow);
   }, []);
 
-  // O Turnstile so e carregado quando o envio precisa de validacao manual.
+  function openCaptchaDialog() {
+    const dialog = captchaDialogRef.current;
+    if (dialog && !dialog.open) dialog.showModal();
+    setCaptchaOpen(true);
+  }
+
+  function closeCaptchaDialog() {
+    const dialog = captchaDialogRef.current;
+    if (dialog?.open) dialog.close();
+    setCaptchaOpen(false);
+  }
+
+  function cancelCaptcha() {
+    captchaToken.current = "";
+    resetTurnstile(widgetId.current);
+    setPhase("idle");
+    closeCaptchaDialog();
+  }
+
+  function handleCaptchaToken(token) {
+    if (!token) {
+      captchaToken.current = "";
+      setStatus({ visible: true, message: t("contact.form.errorCaptcha") });
+      setPhase("idle");
+      closeCaptchaDialog();
+      return;
+    }
+
+    captchaToken.current = token;
+    setStatus({ visible: false, message: "" });
+    closeCaptchaDialog();
+    setPhase("idle");
+    formRef.current?.requestSubmit();
+  }
+
+  // Renderiza o widget no primeiro envio. O modo interaction-only mantém-no oculto
+  // quando a validação automática passa; o diálogo só abre se o Turnstile pedir ação.
   function mountCaptcha() {
+    setPhase("validating");
+
+    if (widgetId.current !== null) {
+      resetTurnstile(widgetId.current);
+      return;
+    }
+
     if (!TURNSTILE_SITE_KEY || captchaStarted.current || !turnstileRef.current) return;
     captchaStarted.current = true;
-    renderTurnstile(turnstileRef.current, (token) => {
-      captchaToken.current = token;
-      if (token) {
-        setCaptchaOpen(false);
-        formRef.current?.requestSubmit();
-      }
-    })
+    renderTurnstile(turnstileRef.current, handleCaptchaToken, openCaptchaDialog)
       .then((id) => (widgetId.current = id))
-      .catch(() => (captchaStarted.current = false)); // bloqueado/sem rede: tenta de novo ao focar o formulario
+      .catch(() => {
+        captchaStarted.current = false;
+        setStatus({ visible: true, message: t("contact.form.errorCaptcha") });
+        setPhase("idle");
+      });
   }
 
   useEffect(() => {
@@ -53,7 +94,6 @@ export default function ContactSection() {
     if (!dialog) return;
     if (captchaOpen && !dialog.open) {
       dialog.showModal();
-      mountCaptcha();
     } else if (!captchaOpen && dialog.open) {
       dialog.close();
     }
@@ -62,7 +102,7 @@ export default function ContactSection() {
   useEffect(() => {
     const dialog = captchaDialogRef.current;
     if (!dialog) return undefined;
-    const close = () => setCaptchaOpen(false);
+    const close = () => cancelCaptcha();
     dialog.addEventListener("cancel", close);
     return () => dialog.removeEventListener("cancel", close);
   }, []);
@@ -99,9 +139,9 @@ export default function ContactSection() {
       const data = new FormData(form);
 
       if (TURNSTILE_SITE_KEY) {
-        // Sem token, pedir a validacao manual dentro do popup.
+        // Inicia a validacao. O popup só aparece se o Turnstile pedir interação.
         if (!captchaToken.current) {
-          setCaptchaOpen(true);
+          mountCaptcha();
           return;
         }
         data.set("cf-turnstile-response", captchaToken.current);
@@ -281,7 +321,7 @@ export default function ContactSection() {
           <h3 id="captchaDialogTitle">{t("contact.form.captchaTitle")}</h3>
           <p>{t("contact.form.captchaPrompt")}</p>
           <div ref={turnstileRef} className="ut-turnstile" />
-          <button className="ut-btn ut-btn-primary" type="button" onClick={() => setCaptchaOpen(false)}>
+          <button className="ut-btn ut-btn-primary" type="button" onClick={cancelCaptcha}>
             {t("contact.form.captchaClose")}
           </button>
         </div>
