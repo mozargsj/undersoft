@@ -82,7 +82,7 @@ export default function Footer({ home = true }) {
               <h5>{t("footer.institutional")}</h5>
               <div className="ut-footer-links">
                 <a href={anchor("#sobre")}>{t("nav.about")}</a>
-                <a href={COMPLAINTS_URL} target="_blank" rel="noopener noreferrer">{t("footer.complaints")}</a>
+                
               </div>
             </div>
 
