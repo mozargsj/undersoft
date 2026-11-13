@@ -3,6 +3,11 @@
    Mesmo tema das paginas legais: fundo #F7F6F0, painel branco, laranja #ff5220, Geist.
    ===================================================================== */
 
+html:has(.ty-page),
+html:has(.ty-page) body {
+  background-color: #F7F6F0;
+}
+
 .ty-page { padding: 6rem 0 6rem; min-height: 100vh; min-height: 100dvh; display: flex; align-items: center; }
 .ty-page > .container { width: 100%; }
 
