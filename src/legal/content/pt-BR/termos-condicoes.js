@@ -11,7 +11,7 @@ export default {
       id: "identificacao",
       title: "Identificação e escopo",
       blocks: [
-        `O site **${C.website}** ("Site") é de propriedade e operado por **${C.legalName}**, pessoa jurídica com NIPC ${C.nipc}, sediada em ${C.address}, matriculada na ${C.registry} ("Undersoft"). Contatos: ${C.email} e ${C.phone}.`,
+        `O site **${C.website}** ("Site") é de propriedade e operado por **${C.legalName}** ("Undersoft"). Contatos: ${C.email} e ${C.phone}.`,
         `Estes Termos e Condições regulam o acesso e o uso do Site e do respectivo formulário de contato. Não regulam a contratação dos serviços da Undersoft, que se rege pelos [Termos de Serviço](${LEGAL_PAGES["termos-de-servico"]}) e pela proposta aceita por cada cliente.`,
         "Ao navegar no Site ou ao enviar o formulário de contato, o usuário declara que leu, compreendeu e aceita estes Termos e Condições. Quem não concordar deve abster-se de utilizar o Site.",
       ],

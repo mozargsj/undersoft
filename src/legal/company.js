@@ -10,9 +10,6 @@ export const COMPANY = {
   websiteUrl: "https://undersoft.pt",
   email: EMAIL.label,
   phone: PHONE.label,
-  nipc: "[NIPC]",
-  address: "[morada completa da sede]",
-  registry: "[conservatória do registo comercial e número de matrícula]",
 };
 
 export const LAST_UPDATED = "12 de novembro de 2026";
@@ -26,10 +23,10 @@ export const LAST_UPDATED_BY_LANG = {
 };
 
 export const LEGAL_PAGES = {
-  "termos-e-condicoes": "/termos-e-condicoes/",
-  "termos-de-servico": "/termos-de-servico/",
-  "politica-de-privacidade": "/politica-de-privacidade/",
-  "politica-de-cookies": "/politica-de-cookies/",
+  "termos-e-condicoes": "/pages/termos-e-condicoes/",
+  "termos-de-servico": "/pages/termos-de-servico/",
+  "politica-de-privacidade": "/pages/politica-de-privacidade/",
+  "politica-de-cookies": "/pages/politica-de-cookies/",
 };
 
 export const COMPLAINTS_URL = "https://www.livroreclamacoes.pt";

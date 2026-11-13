@@ -14,11 +14,11 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: page('index.html'),
-        termosCondicoes: page('termos-e-condicoes/index.html'),
-        termosServico: page('termos-de-servico/index.html'),
-        politicaPrivacidade: page('politica-de-privacidade/index.html'),
-        politicaCookies: page('politica-de-cookies/index.html'),
-        obrigado: page('obrigado/index.html'),
+        termosCondicoes: page('pages/termos-e-condicoes/termos-e-condicoes.html'),
+        termosServico: page('pages/termos-de-servico/termos-de-servico.html'),
+        politicaPrivacidade: page('pages/politica-de-privacidade/politica-de-privacidade.html'),
+        politicaCookies: page('pages/politica-de-cookies/politica-de-cookies.html'),
+        obrigado: page('pages/obrigado/obrigado.html'),
         notFound: page('404.html'),
       },
     },

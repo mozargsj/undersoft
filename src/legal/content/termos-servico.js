@@ -14,7 +14,7 @@ export default {
       id: "prestador",
       title: "Prestador e definições",
       blocks: [
-        `Os serviços são prestados por **${C.legalName}**, NIPC ${C.nipc}, com sede em ${C.address}, matriculada na ${C.registry} ("Undersoft"). Contactos: ${C.email} e ${C.phone}.`,
+        `Os serviços são prestados por **${C.legalName}** ("Undersoft"). Contactos: ${C.email} e ${C.phone}.`,
         "Nestes Termos, entende-se por:",
         {
           ul: [

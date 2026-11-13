@@ -19,7 +19,7 @@ export default {
       id: "responsavel",
       title: "Responsable del tratamiento",
       blocks: [
-        `El responsable del tratamiento es **${C.legalName}**, con número de identificación fiscal (NIPC) ${C.nipc}, y domicilio social en ${C.address} («Undersoft»).`,
+        `El responsable del tratamiento es **${C.legalName}** («Undersoft»).`,
         `Para cualquier cuestión sobre privacidad o para ejercer sus derechos, póngase en contacto con ${C.email}. Undersoft no está legalmente obligada a designar un delegado de protección de datos, sin perjuicio de mantener este canal dedicado a los interesados.`,
         "Esta Política no se aplica a los datos que Undersoft trate **por cuenta de sus clientes** en la ejecución de proyectos (por ejemplo, los datos de los clientes finales de una empresa). En esos casos, el cliente es el responsable del tratamiento y Undersoft actúa como encargado del tratamiento, en virtud de un acuerdo específico, conforme al artículo 28 del RGPD.",
       ],

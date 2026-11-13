@@ -19,7 +19,7 @@ export default {
       id: "responsavel",
       title: "Data controller",
       blocks: [
-        `The data controller is **${C.legalName}**, tax identification number (NIPC) ${C.nipc}, whose registered office is at ${C.address} ("Undersoft").`,
+        `The data controller is **${C.legalName}** ("Undersoft").`,
         `For any question about privacy or to exercise your rights, please contact ${C.email}. Undersoft is not legally required to appoint a data protection officer, but maintains this dedicated channel for data subjects.`,
         "This Policy does not apply to data that Undersoft processes **on behalf of its clients** in the course of projects (for example, the data of a company's end customers). In those cases, the client is the controller and Undersoft acts as processor under a separate agreement, pursuant to Article 28 of the GDPR.",
       ],

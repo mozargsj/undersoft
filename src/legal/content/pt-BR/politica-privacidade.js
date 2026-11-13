@@ -19,7 +19,7 @@ export default {
       id: "responsavel",
       title: "Responsável pelo tratamento",
       blocks: [
-        `O responsável pelo tratamento (controlador) é **${C.legalName}**, NIPC ${C.nipc}, sediada em ${C.address} ("Undersoft").`,
+        `O responsável pelo tratamento (controlador) é **${C.legalName}** ("Undersoft").`,
         `Para qualquer questão sobre privacidade ou para exercer os seus direitos, entre em contato por meio de ${C.email}. A Undersoft não está legalmente obrigada a designar um encarregado de proteção de dados (DPO), sem prejuízo de manter este canal dedicado aos titulares.`,
         "Esta Política não se aplica aos dados que a Undersoft trate **por conta de seus clientes** na execução de projetos (por exemplo, dados dos clientes finais de uma empresa). Nesses casos, o cliente é o responsável pelo tratamento e a Undersoft atua como subcontratante (operador), com base em acordo próprio, nos termos do artigo 28.º do RGPD.",
       ],

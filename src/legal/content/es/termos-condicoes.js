@@ -11,7 +11,7 @@ export default {
       id: "identificacao",
       title: "Identificación y ámbito",
       blocks: [
-        `El sitio web **${C.website}** («Sitio web») es propiedad de **${C.legalName}** y está gestionado por esta, persona jurídica con número de identificación fiscal (NIPC) ${C.nipc}, con domicilio social en ${C.address}, inscrita en ${C.registry} («Undersoft»). Contacto: ${C.email} y ${C.phone}.`,
+        `El sitio web **${C.website}** («Sitio web») es propiedad de **${C.legalName}** y está gestionado por esta («Undersoft»). Contacto: ${C.email} y ${C.phone}.`,
         `Los presentes Términos y Condiciones regulan el acceso y el uso del Sitio web y de su formulario de contacto. No regulan la contratación de los servicios de Undersoft, que se rige por los [Términos de Servicio](${LEGAL_PAGES["termos-de-servico"]}) y por la propuesta aceptada por cada cliente.`,
         "Al navegar por el Sitio web o al enviar el formulario de contacto, el usuario declara haber leído, comprendido y aceptado estos Términos y Condiciones. Quien no esté de acuerdo debe abstenerse de utilizar el Sitio web.",
       ],
