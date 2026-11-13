@@ -11,7 +11,7 @@ export default {
       id: "identificacao",
       title: "Identification and scope",
       blocks: [
-        `The website **${C.website}** (the "Website") is owned and operated by **${C.legalName}**, a legal entity with tax identification number (NIPC) ${C.nipc}, whose registered office is at ${C.address}, registered with the ${C.registry} ("Undersoft"). Contact details: ${C.email} and ${C.phone}.`,
+        `The website **${C.website}** (the "Website") is owned and operated by **${C.legalName}** ("Undersoft"). Contact details: ${C.email} and ${C.phone}.`,
         `These Terms and Conditions govern access to and use of the Website and its contact form. They do not govern the engagement of Undersoft's services, which is governed by the [Terms of Service](${LEGAL_PAGES["termos-de-servico"]}) and by the proposal accepted by each client.`,
         "By browsing the Website or submitting the contact form, the user declares that they have read, understood and accepted these Terms and Conditions. Anyone who does not agree should refrain from using the Website.",
       ],
