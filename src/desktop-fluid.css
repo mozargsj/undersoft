@@ -18,7 +18,7 @@
   .nav { margin-top: 0.588cqi; }
   .logounder { width: 11.765cqi; }
   .stcntt { margin-left: 0.235cqi; }
-  .nav-inner { padding: 7px 10px 7px 20px; }
+  .nav-inner { padding: 7px 10px 7px 20px !important; }
   .brand-mark { width: 2.235cqi; height: 2.235cqi; line-height: 1; }
   .bntcnheader { padding: 0.471cqi 0.941cqi; font-size: max(1.3cqi, var(--fs-min)); }
   .nav-links { font-size: max(1.3cqi, var(--fs-min)); padding: 0.588cqi 1.059cqi; }
