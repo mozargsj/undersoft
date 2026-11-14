@@ -419,6 +419,42 @@
   font-size:0.95rem;
 }
 
+#mensagem::-webkit-scrollbar {
+  width: 14px;
+}
+
+#mensagem::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+#mensagem::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 12px 0;
+}
+
+#mensagem::-webkit-scrollbar-thumb {
+  background: rgba(39, 33, 26, 0.25);
+  background-clip: padding-box;
+  border: 3px solid transparent;
+  border-right-width: 6px;
+  border-radius: 999px;
+}
+
+#mensagem::-webkit-scrollbar-thumb:hover {
+  background: rgba(39, 33, 26, 0.45);
+  background-clip: padding-box;
+}
+
+/* Firefox */
+@supports not selector(::-webkit-scrollbar) {
+  #mensagem {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(39, 33, 26, 0.25) transparent;
+  }
+}
+
 .ut-scope .ut-form-group textarea {
   min-height:0; resize:none;
   border-radius:20px;
