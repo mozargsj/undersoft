@@ -200,7 +200,8 @@
   .ut-scope .ut-contato-social a { font-size: max(1.882cqi, var(--fs-min)); }
   .ut-scope .ut-contato-form { padding: 2.353cqi; }
   .ut-scope .ut-form-group label { margin: 0; line-height: normal; font-size: max(1.1cqi, var(--fs-min)); }
-  .ut-scope .ut-form-group input, .ut-scope .ut-form-group textarea { line-height: normal; padding: 0.882cqi 1.176cqi; font-size: max(1.1cqi, var(--fs-min)); }
+  .ut-scope .ut-form-group input, .ut-scope .ut-form-group textarea, .ut-scope .ut-form-group .ut-select-trigger { line-height: normal; padding: 0.882cqi 1.176cqi; font-size: max(1.1cqi, var(--fs-min)); }
+  .ut-scope .ut-select-option { padding: 0.65cqi 0.82cqi; font-size: max(1.1cqi, var(--fs-min)); }
   .ut-scope .ut-form-check { line-height: normal; font-size: max(1.059cqi, var(--fs-min)); }
   .ut-scope .ut-contato-form .ut-btn-primary { margin-top: 0; line-height: normal; font-size: max(1.3cqi, var(--fs-min)); }
   .ut-scope .ut-form-status { font-size: max(0.941cqi, var(--fs-min)); }

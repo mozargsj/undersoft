@@ -401,13 +401,19 @@
   gap:5px;
 }
 
+.ut-scope .ut-form-row {
+  display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); align-items:start;
+  gap:17px;
+}
+
 .ut-scope .ut-form-group label {
   display:block; font-weight:400; color:rgba(39,33,26,.76); margin:0; line-height:normal;
   font-size:1rem;
 }
 
 .ut-scope .ut-form-group input,
-.ut-scope .ut-form-group textarea {
+.ut-scope .ut-form-group textarea,
+.ut-scope .ut-form-group .ut-select-trigger {
   width:100%; background:rgba(0,0,0,.04); border:none; border-radius:200px; color:#27211a; font-family:inherit; line-height:normal; outline:none; transition:box-shadow .2s ease;
   padding:15px 20px;
   font-size:1re,;
@@ -416,11 +422,60 @@
 .ut-scope .ut-form-group textarea {
   min-height:0; resize:none;
   border-radius:20px;
-  height:292px;
+  height:160px;
+}
+
+/* Select personalizado (ContactSelect): gatilho igual aos inputs + lista propria */
+.ut-scope .ut-select { position:relative; }
+
+.ut-scope .ut-form-group .ut-select-trigger {
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  text-align:left; cursor:pointer; padding-right:20px;
+}
+.ut-scope .ut-select-trigger > span { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.ut-scope .ut-select-trigger.is-placeholder > span { color:rgba(0,0,0,.38); }
+
+.ut-scope .ut-select-chevron {
+  flex-shrink:0; font-size:.8em; color:rgba(39,33,26,.6);
+  transition:transform .25s ease;
+}
+.ut-scope .ut-select.is-open .ut-select-chevron { transform:rotate(180deg); }
+.ut-scope .ut-select.is-open .ut-select-trigger { box-shadow:0 0 0 1px rgb(46 36 32); }
+
+.ut-scope .ut-select-menu {
+  position:absolute; left:0; right:0; top:calc(100% + 8px); z-index:30;
+  margin:0; padding:6px; list-style:none;
+  background:#fff; border-radius:20px;
+  box-shadow:0 0 0 1px rgba(39,33,26,.08), 0 18px 40px rgba(39,33,26,.16);
+  opacity:0; visibility:hidden; transform:translateY(-6px);
+  transition:opacity .18s ease, transform .22s ease, visibility 0s linear .22s;
+}
+.ut-scope .ut-select.is-open .ut-select-menu {
+  opacity:1; visibility:visible; transform:translateY(0);
+  transition-delay:0s;
+}
+
+.ut-scope .ut-select-option {
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  padding:11px 14px; border-radius:14px; cursor:pointer;
+  color:#27211a; line-height:normal;
+  transition:background-color .15s ease, color .15s ease;
+}
+.ut-scope .ut-select-option.is-active { color: #fff !important;background:#ff5220; }
+.ut-scope .ut-select-option.is-selected { color:#ff5220; font-weight:500; }
+.ut-scope .ut-select-check { font-size:.8em; color:#ff5220; opacity:0; }
+.ut-scope .ut-select-option.is-selected .ut-select-check { opacity:1; }
+.ut-scope .ut-select-option.is-active .ut-select-check { color: #fff !important; }
+
+/* input escondido: guarda o valor (FormData) e ancora a mensagem do "required" */
+.ut-scope .ut-select-native {
+  position:absolute; left:0; bottom:0; width:100%; height:1px; padding:0; border:0;
+  opacity:0; pointer-events:none;
 }
 
 .ut-scope .ut-form-group input:focus,
-.ut-scope .ut-form-group textarea:focus {
+.ut-scope .ut-form-group textarea:focus,
+.ut-scope .ut-form-group .ut-select-trigger:focus-visible {
   box-shadow:0 0 0 1px rgb(46 36 32);
 }
 
@@ -837,6 +892,7 @@
   .ut-scope .ut-contato-social a { width:2.923cqi; height:2.923cqi; }
   .ut-scope .ut-contato-form { border-radius:2.308cqi; gap:1.308cqi; }
   .ut-scope .ut-form-group { gap:0.385cqi; }
+  .ut-scope .ut-form-row { gap:1.308cqi; }
   .ut-scope .ut-form-group textarea { border-radius:1.538cqi; height:22.462cqi; }
   .ut-scope .ut-form-check { gap:0.769cqi; }
   .ut-scope .ut-form-check input { width:1.769cqi; height:1.769cqi; border-radius:0.462cqi; }
@@ -1250,4 +1306,19 @@
 .ut-sr-only {
   position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
   overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+
+/* Mobile: cada campo ocupa a linha toda (um embaixo do outro) */
+@media (max-width: 767px) {
+  .ut-scope .ut-form-row { display:contents; }
+}
+
+/* Mobile: mesmo tamanho de texto e espacamento dos outros campos */
+@media (max-width: 1024px) {
+  .ut-scope .ut-form-group .ut-select-trigger {
+    font-size: var(--t-body);
+    padding: min(3cqi, 12px) min(4.5cqi, 18px);
+  }
+  .ut-scope .ut-select-option { font-size: var(--t-body); padding: 13px 14px; }
 }

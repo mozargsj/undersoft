@@ -93,11 +93,18 @@ export default {
     const name = oneLine(form.get("name"), 120);
     const email = oneLine(form.get("email"), 254);
     const message = String(form.get("message") ?? "").replace(/\r\n/g, "\n").trim().slice(0, 5000);
+    const company = oneLine(form.get("company"), 120);
+    const phone = oneLine(form.get("phone"), 40);
+    const tools = oneLine(form.get("tools"), 200);
+    const prefKey = oneLine(form.get("contactPref"), 20);
     const terms = form.get("terms");
     const source = oneLine(form.get("_source"), 80) || "undersoft.pt";
     const subjectIn = oneLine(form.get("_subject"), 120);
 
-    if (!name || !EMAIL_RE.test(email) || !message || !terms) {
+    const PREFS = { email: "E-mail", phone: "Telemóvel", whatsapp: "WhatsApp" };
+    const contactPref = PREFS[prefKey];
+
+    if (!name || !EMAIL_RE.test(email) || !message || !terms || !contactPref) {
       return json({ ok: false, error: "invalid" }, 400, cors);
     }
 
@@ -123,7 +130,11 @@ export default {
     const subject = subjectIn || "Novo contacto pelo site";
     const text = [
       `Nome: ${name}`,
+      `Empresa: ${company || "-"}`,
       `E-mail: ${email}`,
+      `Telemóvel: ${phone || "-"}`,
+      `Contacto preferido: ${contactPref}`,
+      `Ferramentas que usam hoje: ${tools || "-"}`,
       `Origem: ${source}`,
       `Data: ${new Date().toISOString()}`,
       "",

@@ -10,6 +10,123 @@ import { TURNSTILE_SITE_KEY, renderTurnstile, resetTurnstile } from "../lib/turn
 const FORM_ENDPOINT = import.meta.env.VITE_CONTACT_ENDPOINT || "https://undersoft-contact.mozargsj.workers.dev";
 const THANKS_URL = "/pages/obrigado";
 
+// Select personalizado (o <option> nativo nao aceita estilo). Mantem um input escondido com o
+// valor, entao o FormData, o "required" e o reset do formulario continuam a funcionar.
+function ContactSelect({ id, name, placeholder, options, required }) {
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState("");
+  const [active, setActive] = useState(-1);
+  const wrapRef = useRef(null);
+  const triggerRef = useRef(null);
+  const selectedIndex = options.findIndex((o) => o.value === value);
+  const selected = options[selectedIndex];
+  const listId = `${id}-list`;
+
+  useEffect(() => {
+    if (!open) return undefined;
+    const onDown = (e) => {
+      if (!wrapRef.current?.contains(e.target)) setOpen(false);
+    };
+    document.addEventListener("pointerdown", onDown);
+    return () => document.removeEventListener("pointerdown", onDown);
+  }, [open]);
+
+  useEffect(() => {
+    const form = wrapRef.current?.closest("form");
+    if (!form) return undefined;
+    const onReset = () => { setValue(""); setOpen(false); };
+    form.addEventListener("reset", onReset);
+    return () => form.removeEventListener("reset", onReset);
+  }, []);
+
+  function openMenu() {
+    setActive(selectedIndex >= 0 ? selectedIndex : 0);
+    setOpen(true);
+  }
+
+  function choose(index) {
+    const option = options[index];
+    if (!option) return;
+    setValue(option.value);
+    setOpen(false);
+    triggerRef.current?.focus();
+  }
+
+  function onKeyDown(e) {
+    const last = options.length - 1;
+    if (!open) {
+      if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+        e.preventDefault();
+        openMenu();
+      }
+      return;
+    }
+    switch (e.key) {
+      case "ArrowDown": e.preventDefault(); setActive((i) => Math.min(i + 1, last)); break;
+      case "ArrowUp": e.preventDefault(); setActive((i) => Math.max(i - 1, 0)); break;
+      case "Home": e.preventDefault(); setActive(0); break;
+      case "End": e.preventDefault(); setActive(last); break;
+      case "Enter":
+      case " ": e.preventDefault(); choose(active); break;
+      case "Escape": e.preventDefault(); setOpen(false); break;
+      case "Tab": setOpen(false); break;
+      default:
+    }
+  }
+
+  return (
+    <div className={`ut-select${open ? " is-open" : ""}`} ref={wrapRef}>
+      <button
+        type="button"
+        id={id}
+        ref={triggerRef}
+        className={`ut-select-trigger${selected ? "" : " is-placeholder"}`}
+        role="combobox"
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        aria-controls={listId}
+        aria-activedescendant={open && active >= 0 ? `${id}-opt-${active}` : undefined}
+        onClick={() => (open ? setOpen(false) : openMenu())}
+        onKeyDown={onKeyDown}
+        onKeyUp={(e) => e.key === " " && e.preventDefault()}
+      >
+        <span>{selected ? selected.label : placeholder}</span>
+        <i className="fa-solid fa-chevron-down ut-select-chevron" aria-hidden="true"></i>
+      </button>
+
+      <ul id={listId} className="ut-select-menu" role="listbox" aria-labelledby={`${id}-label`}>
+        {options.map((option, index) => (
+          <li
+            key={option.value}
+            id={`${id}-opt-${index}`}
+            role="option"
+            aria-selected={option.value === value}
+            className={`ut-select-option${index === active ? " is-active" : ""}${option.value === value ? " is-selected" : ""}`}
+            onPointerEnter={() => setActive(index)}
+            onMouseDown={(e) => e.preventDefault()}
+            onClick={() => choose(index)}
+          >
+            <span>{option.label}</span>
+            <i className="fa-solid fa-check ut-select-check" aria-hidden="true"></i>
+          </li>
+        ))}
+      </ul>
+
+      <input
+        className="ut-select-native"
+        type="text"
+        name={name}
+        value={value}
+        onChange={() => {}}
+        required={required}
+        tabIndex={-1}
+        aria-hidden="true"
+        autoComplete="off"
+      />
+    </div>
+  );
+}
+
 export default function ContactSection() {
   const { t } = useI18n();
   const BUTTON_LABEL = t("contact.form.button");
@@ -228,28 +345,55 @@ export default function ContactSection() {
             ref={formRef}
             onSubmit={handleSubmit}
           >
-            <div className="ut-form-group">
-              <label htmlFor="nome">{t("contact.form.name")}</label>
-              <input
-                id="nome"
-                name="name"
-                type="text"
-                autoComplete="name"
-                placeholder={t("contact.form.namePlaceholder")}
-                required
-              />
+            <div className="ut-form-row">
+              <div className="ut-form-group">
+                <label htmlFor="nome">{t("contact.form.name")}</label>
+                <input
+                  id="nome"
+                  name="name"
+                  type="text"
+                  autoComplete="name"
+                  placeholder={t("contact.form.namePlaceholder")}
+                  required
+                />
+              </div>
+
+              <div className="ut-form-group">
+                <label htmlFor="empresa">{t("contact.form.company")}</label>
+                <input
+                  id="empresa"
+                  name="company"
+                  type="text"
+                  autoComplete="organization"
+                  placeholder={t("contact.form.companyPlaceholder")}
+                />
+              </div>
             </div>
 
-            <div className="ut-form-group">
-              <label htmlFor="email">{t("contact.form.email")}</label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                autoComplete="email"
-                placeholder={t("contact.form.emailPlaceholder")}
-                required
-              />
+            <div className="ut-form-row">
+              <div className="ut-form-group">
+                <label htmlFor="email">{t("contact.form.email")}</label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  placeholder={t("contact.form.emailPlaceholder")}
+                  required
+                />
+              </div>
+
+              <div className="ut-form-group">
+                <label htmlFor="telemovel">{t("contact.form.phone")}</label>
+                <input
+                  id="telemovel"
+                  name="phone"
+                  type="tel"
+                  autoComplete="tel"
+                  inputMode="tel"
+                  placeholder={t("contact.form.phonePlaceholder")}
+                />
+              </div>
             </div>
 
             <div className="ut-form-group">
@@ -260,6 +404,34 @@ export default function ContactSection() {
                 placeholder={t("contact.form.messagePlaceholder")}
                 required
               ></textarea>
+            </div>
+
+            <div className="ut-form-row">
+              <div className="ut-form-group">
+                <label htmlFor="ferramentas">{t("contact.form.tools")}</label>
+                <input
+                  id="ferramentas"
+                  name="tools"
+                  type="text"
+                  autoComplete="off"
+                  placeholder={t("contact.form.toolsPlaceholder")}
+                />
+              </div>
+
+              <div className="ut-form-group">
+                <label id="contactoPreferido-label" htmlFor="contactoPreferido">{t("contact.form.contactPref")}</label>
+                <ContactSelect
+                  id="contactoPreferido"
+                  name="contactPref"
+                  required
+                  placeholder={t("contact.form.contactPrefPlaceholder")}
+                  options={[
+                    { value: "email", label: t("contact.form.contactOptions.email") },
+                    { value: "phone", label: t("contact.form.contactOptions.phone") },
+                    { value: "whatsapp", label: t("contact.form.contactOptions.whatsapp") },
+                  ]}
+                />
+              </div>
             </div>
 
             <label className="ut-form-check">
