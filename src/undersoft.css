@@ -3054,7 +3054,7 @@ html.is-loading .fab-cta {
 }
 
 @media (min-width: 1025px) and (max-width: 1249px) {
-  .container, .nav {
+  .container, header {
     padding: 0 20px !important;
   }
   .demo-ma-panels-stack .scroll-stack-card.demo-ma-stack-item {
