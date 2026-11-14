@@ -408,7 +408,7 @@
 
 .ut-scope .ut-form-group label {
   display:block; font-weight:400; color:rgba(39,33,26,.76); margin:0; line-height:normal;
-  font-size:1rem;
+  font-size:0.95rem;
 }
 
 .ut-scope .ut-form-group input,
@@ -416,7 +416,7 @@
 .ut-scope .ut-form-group .ut-select-trigger {
   width:100%; background:rgba(0,0,0,.04); border:none; border-radius:200px; color:#27211a; font-family:inherit; line-height:normal; outline:none; transition:box-shadow .2s ease;
   padding:15px 20px;
-  font-size:1re,;
+  font-size:0.95rem;
 }
 
 .ut-scope .ut-form-group textarea {
