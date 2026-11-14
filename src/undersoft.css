@@ -3053,6 +3053,15 @@ html.is-loading .fab-cta {
   padding: 0.5em 0.5em 0.5em 0.7em;
 }
 
+@media (min-width: 1025px) and (max-width: 1249px) {
+  .container, .nav {
+    padding: 0 20px !important;
+  }
+  .demo-ma-panels-stack .scroll-stack-card.demo-ma-stack-item {
+    border-radius: unset !important;
+  }
+}
+
 .fab-cta-link:active .bntcnheader {
   transform: scale(0.97);
 }
